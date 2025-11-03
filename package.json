@@ -1,0 +1,22 @@
+{
+  "name": "kayjay-security-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The official website for KayJay Security, Sri Lanka's No.1 security service provider with over 45 years of trusted security excellence in integrated security systems, training, and manpower solutions.",
+  "scripts": {
+    "dev": "echo \"This script would start a local development server. In this environment, you can simply preview the app.\" && exit 0",
+    "build": "echo \"This script would bundle the app for production.\" && exit 1",
+    "preview": "echo \"This script would preview the production build.\" && exit 1"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.25.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.3"
+  }
+}
