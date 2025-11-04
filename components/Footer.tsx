@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, InstagramIcon } from './icons';
@@ -7,7 +6,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-kayjay-blue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-lg font-bold text-kayjay-gold mb-4">KayJay Security</h3>
@@ -33,11 +32,21 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-bold text-kayjay-gold mb-4">Contact Info</h3>
             <address className="not-italic text-sm text-gray-400 space-y-2">
               <p>618, Aluthmawatha Road, Colombo 15, Sri Lanka</p>
-              <p>Phone: <a href="tel:+94112522302" className="hover:text-white transition-colors">+94 (11) 252 2302</a></p>
               <p>Email: <a href="mailto:sales@kayjay-group.com" className="hover:text-white transition-colors">sales@kayjay-group.com</a></p>
             </address>
           </div>
 
+          {/* Phone Numbers */}
+          <div>
+            <h3 className="text-lg font-bold text-kayjay-gold mb-4">Phone Numbers</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="tel:+94112522302" className="hover:text-white transition-colors">+94 (11) 252 2302</a></li>
+                <li><a href="tel:+94112529242" className="hover:text-white transition-colors">+94 (11) 252 9242</a></li>
+                <li><a href="tel:+94112526060" className="hover:text-white transition-colors">+94 (11) 252 6060</a></li>
+                <li><a href="tel:+94114891888" className="hover:text-white transition-colors">+94 (11) 489 1888</a></li>
+            </ul>
+          </div>
+          
           {/* Social Media */}
           <div>
             <h3 className="text-lg font-bold text-kayjay-gold mb-4">Follow Us</h3>

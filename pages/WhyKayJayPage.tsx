@@ -48,15 +48,6 @@ const WhyKayJayPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="zoom-in">
-          <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Ready for Unparalleled Security?</h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-8">Partner with a leader in Sri Lankan security. Let us build a tailored solution that brings you peace of mind.</p>
-          <Link to="/request-a-quote" className="bg-kayjay-gold text-kayjay-blue font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-transform transform hover:scale-105">
-            Request a Free Consultation
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

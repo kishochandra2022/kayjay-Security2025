@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ScrollToTopButton from './ScrollToTopButton';
 import WhatsAppButton from './WhatsAppButton';
+import CallToAction from './CallToAction';
 
 declare const AOS: any; // Declare AOS to be available globally
 
@@ -66,6 +67,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <main className="flex-grow">
         {children}
       </main>
+      <CallToAction />
       <Footer />
       <WhatsAppButton />
       <ScrollToTopButton />

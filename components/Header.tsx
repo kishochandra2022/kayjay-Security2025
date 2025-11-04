@@ -16,6 +16,7 @@ const navLinks = [
         heading: 'Core Services',
         links: [
           { name: 'Manned Guard Services', path: '/solutions' },
+          { name: 'Security Personnel', path: '/security-personnel' },
           { name: 'Electronic Security', path: '/solutions' },
           { name: 'Retail Security', path: '/solutions' },
           { name: 'Civil Detectives', path: '/solutions' },

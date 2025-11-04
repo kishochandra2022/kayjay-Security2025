@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
@@ -15,6 +16,7 @@ import CashManagementPage from './pages/CashManagementPage';
 import QuotePage from './pages/QuotePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
+import SecurityPersonnelPage from './pages/SecurityPersonnelPage';
 
 const App: React.FC = () => {
   return (
@@ -34,6 +36,7 @@ const App: React.FC = () => {
           <Route path="/cash-management" element={<CashManagementPage />} />
           <Route path="/request-a-quote" element={<QuotePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/security-personnel" element={<SecurityPersonnelPage />} />
           {/* A simple catch-all route for 404s can redirect home */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

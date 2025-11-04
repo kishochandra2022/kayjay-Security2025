@@ -1,3 +1,4 @@
+
 export interface SearchableContent {
   path: string;
   title: string;
@@ -71,5 +72,11 @@ export const searchableContent: SearchableContent[] = [
     title: 'KayJay Prime Movers',
     description: 'Learn about our logistics and transportation division, enhancing our integrated security solutions across Sri Lanka.',
     keywords: 'prime movers, logistics, transportation, transport, group company',
+  },
+  {
+    path: '/security-personnel',
+    title: 'Security Personnel Services',
+    description: 'Expert security personnel for various sectors including retail, events, public, and industrial. We provide trained officers, detectives, and total security solutions.',
+    keywords: 'security personnel, guards, officers, retail security, event security, public sector, industrial, tss solution, consulting',
   },
 ];
