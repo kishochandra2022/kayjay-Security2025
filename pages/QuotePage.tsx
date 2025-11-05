@@ -57,7 +57,7 @@ const QuotePage: React.FC = () => {
     formData.append('email', formState.email);
     formData.append('phone', formState.phone);
     formData.append('message', formState.message);
-    formData.append('services', selectedServices.join(','));
+    formData.append('services', selectedServices.join(', '));
 
     try {
         const response = await fetch('/api/quote-handler.php', {

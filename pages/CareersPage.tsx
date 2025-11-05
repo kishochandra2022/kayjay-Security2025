@@ -53,7 +53,9 @@ const CareersPage: React.FC = () => {
     formData.append('phone', formState.phone);
     formData.append('position', formState.position);
     formData.append('coverLetter', formState.coverLetter);
-    formData.append('cvFile', cvFile);
+    if (cvFile) {
+      formData.append('cvFile', cvFile);
+    }
 
     try {
         const response = await fetch('/api/careers-handler.php', {

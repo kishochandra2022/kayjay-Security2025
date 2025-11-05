@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
+import ServiceSidebar from '../components/ServiceSidebar';
 import { FaShieldAlt, FaDollarSign, FaBox, FaWeightHanging, FaTrophy, FaHandshake } from 'react-icons/fa';
 
 const FeatureCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
@@ -32,52 +33,57 @@ const PrimeMoversPage: React.FC = () => {
       />
       <PageHeader title="KAYJAY PRIME MOVERS" subtitle="Seamless & Secure Transportation Solutions Across Sri Lanka." />
       
-      <section className="py-16 md:py-24 bg-white">
+      <div className="bg-kayjay-light-gray">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-                <img src="https://picsum.photos/800/600?random=6" alt="A large transportation truck from KayJay Prime Movers, part of a leading security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
-            </div>
-            <div data-aos="fade-left">
-              <h2 className="text-3xl font-bold text-kayjay-blue mb-4">A Legacy of Trust, A Future in Motion</h2>
-              <div className="text-gray-700 space-y-4">
-                <p>
-                  Gaining over 40 years of experience, Kayjay Group has become an iconic name in Security. We are a modern, vision-driven, and fast developing group of companies. Now we have move forward with transportation services in Sri Lanka. We offer a wide range of logistical services to meet the complex needs of companies.
-                </p>
-                <p>
-                  We thoroughly believe that the key to success is to always integrate with our customers to make their transport solutions as seamless as possible. We are committed to realizing their logistics needs at an optimum cost. Our strength lies in the wealth of our experience of working with so many different industries, by handling their logistic services. As one of the fastest growing logistic infrastructure providers, our main aim is to manage operations smoothly so that goods are at the right place at the right time.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-16 md:py-24 bg-kayjay-light-gray">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center text-kayjay-blue mb-12" data-aos="fade-up">Our Commitment to Excellence</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {features.map((feature, index) => (
-                    <div key={feature.title} data-aos="zoom-in" data-aos-delay={index * 100}>
-                        <FeatureCard title={feature.title} icon={feature.icon}>
-                            {feature.content}
-                        </FeatureCard>
+            <div className="flex flex-col md:flex-row gap-12 lg:gap-16 py-16 md:py-24">
+                <ServiceSidebar />
+                <main className="flex-1 min-w-0 space-y-16">
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <img src="https://picsum.photos/800/600?random=6" alt="A large transportation truck from KayJay Prime Movers, part of a leading security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-kayjay-blue mb-4">A Legacy of Trust, A Future in Motion</h2>
+                                <div className="text-gray-700 space-y-4">
+                                    <p>
+                                    Gaining over 40 years of experience, Kayjay Group has become an iconic name in Security. We are a modern, vision-driven, and fast developing group of companies. Now we have move forward with transportation services in Sri Lanka. We offer a wide range of logistical services to meet the complex needs of companies.
+                                    </p>
+                                    <p>
+                                    We thoroughly believe that the key to success is to always integrate with our customers to make their transport solutions as seamless as possible. We are committed to realizing their logistics needs at an optimum cost. Our strength lies in the wealth of our experience of working with so many different industries, by handling their logistic services. As one of the fastest growing logistic infrastructure providers, our main aim is to manage operations smoothly so that goods are at the right place at the right time.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                ))}
-            </div>
-        </div>
-      </section>
 
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-kayjay-blue mb-10">Key Clients</h2>
-            <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-gray-600">
-                <p className="text-xl font-semibold">Jacobi Carbons Lanka (Pvt) Ltd</p>
-                <p className="text-xl font-semibold">Dart Global Logistics (Pvt) Ltd</p>
-                <p className="text-xl font-semibold">Tajit & Company (Pvt) Ltd</p>
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <h2 className="text-3xl font-bold text-center text-kayjay-blue mb-12">Our Commitment to Excellence</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {features.map((feature, index) => (
+                                <div key={feature.title} data-aos-delay={index * 100}>
+                                    <FeatureCard title={feature.title} icon={feature.icon}>
+                                        {feature.content}
+                                    </FeatureCard>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold text-kayjay-blue mb-10">Key Clients</h2>
+                            <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-gray-600">
+                                <p className="text-xl font-semibold">Jacobi Carbons Lanka (Pvt) Ltd</p>
+                                <p className="text-xl font-semibold">Dart Global Logistics (Pvt) Ltd</p>
+                                <p className="text-xl font-semibold">Tajit & Company (Pvt) Ltd</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
+import ServiceSidebar from '../components/ServiceSidebar';
 // FIX: `FaCctv` does not exist in `react-icons/fa`. Replaced with `FaTv`.
 import { FaStore, FaUserSecret, FaGavel, FaTv, FaConciergeBell, FaUserShield } from 'react-icons/fa';
 
@@ -33,60 +34,62 @@ const ServicesPage: React.FC = () => {
       />
       <PageHeader title="Our Top Security Solutions" subtitle="A wide spectrum of professional security services in Sri Lanka to meet both commercial and residential needs." />
 
-      <section className="py-16 md:py-24 bg-kayjay-light-gray">
+      <div className="bg-kayjay-light-gray">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesData.map((service, index) => (
-                <div key={service.title} data-aos="fade-up" data-aos-delay={index * 100}>
-                    <ServiceCard title={service.title} icon={service.icon}>
-                        <p>{service.content}</p>
-                    </ServiceCard>
-                </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-              <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Pre-employment Checks & Testing</h2>
-              <p className="text-lg text-gray-700 mb-6">Before recruitment, every candidate for our security services in Sri Lanka undergoes a rigorous vetting process to ensure only reliable individuals are deployed.</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-600">
-                <li>Background / criminal record verification</li>
-                <li>Aptitude testing</li>
-                <li>Psychological and integrity assessments</li>
-              </ul>
-            </div>
-            <div data-aos="fade-left">
-              <img src="https://picsum.photos/800/600?random=3" alt="A professional conducting a background check for a private security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
+            <div className="flex flex-col md:flex-row gap-12 lg:gap-16 py-16 md:py-24">
+                <ServiceSidebar />
+                <main className="flex-1 min-w-0 space-y-16">
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {servicesData.map((service, index) => (
+                                <div key={service.title} data-aos="fade-up" data-aos-delay={index * 50}>
+                                    <ServiceCard title={service.title} icon={service.icon}>
+                                        <p>{service.content}</p>
+                                    </ServiceCard>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Pre-employment Checks & Testing</h2>
+                                <p className="text-lg text-gray-700 mb-6">Before recruitment, every candidate for our security services in Sri Lanka undergoes a rigorous vetting process to ensure only reliable individuals are deployed.</p>
+                                <ul className="list-disc list-inside space-y-2 text-gray-600">
+                                    <li>Background / criminal record verification</li>
+                                    <li>Aptitude testing</li>
+                                    <li>Psychological and integrity assessments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <img src="https://picsum.photos/800/600?random=3" alt="A professional conducting a background check for a private security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
 
-      <section className="py-16 md:py-24 bg-kayjay-light-gray">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1" data-aos="fade-right">
-              <img src="https://picsum.photos/800/600?random=4" alt="Professional security guards in Sri Lanka during a training session" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
-            </div>
-            <div className="order-1 md:order-2" data-aos="fade-left">
-              <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Training & Development</h2>
-              <p className="text-lg text-gray-700">We conduct extensive training courses—practical, theoretical, and scenario-based—for both local and international clients. Officers are trained in surveillance, emergency response, client handling, and technology usage.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <div className="order-2 md:order-1">
+                                <img src="https://picsum.photos/800/600?random=4" alt="Professional security guards in Sri Lanka during a training session" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                            </div>
+                            <div className="order-1 md:order-2">
+                                <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Training & Development</h2>
+                                <p className="text-lg text-gray-700">We conduct extensive training courses—practical, theoretical, and scenario-based—for both local and international clients. Officers are trained in surveillance, emergency response, client handling, and technology usage.</p>
+                            </div>
+                        </div>
+                    </div>
 
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="zoom-in">
-            <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Cash Transit & Management</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">As a trusted security provider in Sri Lanka, we deliver total cash management solutions designed to protect cash during transportation. Our protocols, armored vehicles, and trained personnel ensure maximum protection.</p>
+                    <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Cash Transit & Management</h2>
+                            <p className="text-lg text-gray-700 max-w-3xl mx-auto">As a trusted security provider in Sri Lanka, we deliver total cash management solutions designed to protect cash during transportation. Our protocols, armored vehicles, and trained personnel ensure maximum protection.</p>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
-      </section>
-
+      </div>
     </div>
   );
 };

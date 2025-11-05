@@ -3,7 +3,62 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroCarousel from '../components/HeroCarousel';
 import Seo from '../components/Seo';
-import { FaCheck, FaShieldAlt, FaUserShield, FaThLarge, FaHandshake } from 'react-icons/fa';
+import { FaCheck, FaShieldAlt, FaUserShield, FaThLarge, FaHandshake, FaTruck, FaTv, FaCertificate, FaStore, FaShippingFast } from 'react-icons/fa';
+
+const ServiceCard: React.FC<{ title: string; description: string; path: string; icon: React.ReactNode; delay: number }> = ({ title, description, path, icon, delay }) => (
+  <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full" data-aos="fade-up" data-aos-delay={delay}>
+    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-6 flex-shrink-0">
+      {icon}
+    </div>
+    <h3 className="text-2xl font-bold text-kayjay-blue mb-4 text-center">{title}</h3>
+    <p className="text-gray-600 text-center flex-grow">{description}</p>
+    <div className="mt-6 text-center">
+      <Link to={path} className="font-bold text-kayjay-blue hover:text-kayjay-gold transition-colors">
+        Learn More &rarr;
+      </Link>
+    </div>
+  </div>
+);
+
+const coreServices = [
+    {
+        title: "Security Personnel",
+        description: "Highly-trained, professional security guards to protect your premises, assets, and people.",
+        path: "/security-personnel",
+        icon: <FaUserShield className="h-8 w-8" />,
+    },
+    {
+        title: "Cash Management & Transit",
+        description: "Secure armored vehicle services for cash-in-transit, ATM replenishment, and total cash management.",
+        path: "/cash-transit",
+        icon: <FaTruck className="h-8 w-8" />,
+    },
+    {
+        title: "Electronic Security",
+        description: "State-of-the-art CCTV systems, access control, and intrusion alarms for modern, layered security.",
+        path: "/solutions",
+        icon: <FaTv className="h-8 w-8" />,
+    },
+    {
+        title: "Expertise & Training",
+        description: "Comprehensive training programs and rigorous vetting to ensure the highest standards of service.",
+        path: "/expertise",
+        icon: <FaCertificate className="h-8 w-8" />,
+    },
+    {
+        title: "Retail & Corporate Security",
+        description: "Specialized security for retail outlets, corporate offices, and public sector institutions.",
+        path: "/security-personnel",
+        icon: <FaStore className="h-8 w-8" />,
+    },
+    {
+        title: "Logistics & Transport",
+        description: "Safe, cost-effective, and reliable transportation solutions for heavy machinery and goods.",
+        path: "/prime-movers",
+        icon: <FaShippingFast className="h-8 w-8" />,
+    },
+];
+
 
 const HomePage: React.FC = () => {
   return (
@@ -56,6 +111,30 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       
+       {/* Our Solutions Section */}
+      <section className="py-20 bg-kayjay-light-gray">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12" data-aos="fade-up">
+                  <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue">Explore Our Core Security Solutions</h2>
+                  <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+                      From manned guarding to advanced technological integrations, we provide comprehensive security services tailored to your needs.
+                  </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {coreServices.map((service, index) => (
+                      <ServiceCard
+                          key={service.title}
+                          title={service.title}
+                          description={service.description}
+                          path={service.path}
+                          icon={service.icon}
+                          delay={index * 100}
+                      />
+                  ))}
+              </div>
+          </div>
+      </section>
+
       {/* Intro Video Section */}
       <section className="py-20 bg-kayjay-blue text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +164,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Our Promise Section */}
-      <section className="bg-kayjay-light-gray py-20">
+      <section className="bg-white py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
             <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue mb-4">Our Promise of Protection</h2>
