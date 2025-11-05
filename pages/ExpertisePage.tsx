@@ -23,6 +23,15 @@ const IconListItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode 
 );
 
 const ExpertisePage: React.FC = () => {
+    const companyStandards = [
+        { icon: <FaUserTie className="mr-3"/>, title: "Uniforms & ID", description: "Training on proper uniform standards and issuance of official ID cards.", level: "Advanced", percentage: 95 },
+        { icon: <FaBookOpen className="mr-3"/>, title: "Standing Orders", description: "Detailed explanation of Standing Orders with instructions for strict adherence.", level: "Advanced", percentage: 100 },
+        { icon: <FaClock className="mr-3"/>, title: "Punching Procedure", description: "Instruction on the correct procedure for Guard Tour Punching.", level: "Intermediate", percentage: 85 },
+        { icon: <FaUserShield className="mr-3"/>, title: "Professional Conduct", description: "Respectful conduct, understanding duties, and fulfilling responsibilities.", level: "Advanced", percentage: 100 },
+        { icon: <FaFileSignature className="mr-3"/>, title: "Documentation", description: "Maintaining a clear, legible incident log (IB) and coordinating with management.", level: "Advanced", percentage: 90 },
+        { icon: <FaDoorOpen className="mr-3"/>, title: "Gate Pass & Checks", description: "Proper procedures for Gate Passes, body frisking, and thorough physical checks.", level: "Intermediate", percentage: 80 }
+    ];
+
   return (
     <div>
       <Seo
@@ -77,30 +86,23 @@ const ExpertisePage: React.FC = () => {
                     </div>
                      <p className="text-gray-700 mb-8">Kay Jay Security conducts training that exceeds our competitors. The knowledge of our management team is passed on to our new employees. In addition to Ministry of Defense mandated certification, all personnel attend rigorous company training programs.</p>
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaUserTie className="mr-3"/>Uniforms & ID</div>
-                            <p className="text-sm text-gray-600">Training on proper uniform standards and issuance of official ID cards.</p>
-                        </div>
-                         <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaBookOpen className="mr-3"/>Standing Orders</div>
-                            <p className="text-sm text-gray-600">Detailed explanation of Standing Orders with instructions for strict adherence.</p>
-                        </div>
-                         <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaClock className="mr-3"/>Punching Procedure</div>
-                            <p className="text-sm text-gray-600">Instruction on the correct procedure for Guard Tour Punching.</p>
-                        </div>
-                        <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaUserShield className="mr-3"/>Professional Conduct</div>
-                            <p className="text-sm text-gray-600">Respectful conduct, understanding duties, and fulfilling responsibilities.</p>
-                        </div>
-                        <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaFileSignature className="mr-3"/>Documentation</div>
-                            <p className="text-sm text-gray-600">Maintaining a clear, legible incident log (IB) and coordinating with management.</p>
-                        </div>
-                        <div className="bg-kayjay-light-gray p-4 rounded-lg">
-                            <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2"><FaDoorOpen className="mr-3"/>Gate Pass & Checks</div>
-                            <p className="text-sm text-gray-600">Proper procedures for Gate Passes, body frisking, and thorough physical checks.</p>
-                        </div>
+                        {companyStandards.map((standard, index) => (
+                            <div key={index} className="bg-kayjay-light-gray p-4 rounded-lg flex flex-col">
+                                <div className="flex items-center text-lg font-semibold text-kayjay-blue mb-2">{standard.icon}{standard.title}</div>
+                                <p className="text-sm text-gray-600 flex-grow">{standard.description}</p>
+                                <div className="mt-4">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-kayjay-blue bg-kayjay-gold/30">
+                                            {standard.level}
+                                        </span>
+                                        <span className="text-sm font-bold text-kayjay-blue">{standard.percentage}%</span>
+                                    </div>
+                                    <div className="w-full bg-gray-300 rounded-full h-2.5">
+                                        <div className="bg-kayjay-gold h-2.5 rounded-full" style={{width: `${standard.percentage}%`}}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                      </div>
                   </div>
 
