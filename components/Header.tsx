@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { searchableContent, SearchableContent } from '../data/searchableContent';
@@ -48,6 +47,39 @@ const navLinks = [
 // Assuming your logo is named 'logo.svg' and is in the 'public' folder.
 const LOGO_PATH = '/logo.svg';
 
+/**
+ * Calculates the Levenshtein distance between two strings.
+ * This is used for fuzzy string matching to account for typos.
+ */
+const levenshteinDistance = (a: string, b: string): number => {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+
+  const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+
+  for (let i = 0; i <= a.length; i++) {
+    matrix[0][i] = i;
+  }
+
+  for (let j = 0; j <= b.length; j++) {
+    matrix[j][0] = j;
+  }
+
+  for (let j = 1; j <= b.length; j++) {
+    for (let i = 1; i <= a.length; i++) {
+      const indicator = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[j][i] = Math.min(
+        matrix[j][i - 1] + 1,        // deletion
+        matrix[j - 1][i] + 1,        // insertion
+        matrix[j - 1][i - 1] + indicator, // substitution
+      );
+    }
+  }
+
+  return matrix[b.length][a.length];
+};
+
+
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSubMenu, setOpenMobileSubMenu] = useState<string | null>(null);
@@ -61,11 +93,6 @@ const Header: React.FC = () => {
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
-
-  const activeLinkStyle = {
-    color: '#D4AF37',
-    fontWeight: '700',
-  };
 
   // Effect for search overlay
   useEffect(() => {
@@ -103,13 +130,33 @@ const Header: React.FC = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
+    const lowerCaseTerm = term.toLowerCase().trim();
     setSearchTerm(term);
-    if (term.length > 0) {
-      const results = searchableContent.filter(item =>
-        item.title.toLowerCase().includes(term.toLowerCase()) ||
-        item.keywords.toLowerCase().includes(term.toLowerCase()) ||
-        item.description.toLowerCase().includes(term.toLowerCase())
-      );
+
+    if (lowerCaseTerm.length > 0) {
+      const searchWords = lowerCaseTerm.split(/\s+/).filter(Boolean);
+
+      const results = searchableContent.filter(item => {
+        const content = `${item.title} ${item.keywords} ${item.description}`
+          .toLowerCase()
+          .replace(/[^\w\s]/g, ' ');
+        
+        // Quick check for exact phrase match
+        if (content.includes(lowerCaseTerm)) {
+          return true;
+        }
+
+        const contentWords = [...new Set(content.split(/\s+/).filter(Boolean))];
+
+        return searchWords.every(searchWord =>
+          contentWords.some(contentWord => {
+            const distance = levenshteinDistance(searchWord, contentWord);
+            // Allow more mistakes for longer words: 0 for len < 4, 1 for len 4-7, 2 for len > 7
+            const threshold = searchWord.length > 7 ? 2 : searchWord.length > 3 ? 1 : 0;
+            return distance <= threshold;
+          })
+        );
+      });
       setSearchResults(results);
       setIsResultsVisible(true);
     } else {
@@ -141,7 +188,7 @@ const Header: React.FC = () => {
           {searchResults.map(result => (
             <li key={result.path}>
               <Link to={result.path} onClick={closeSearch} className="block p-4 hover:bg-kayjay-light-gray transition-colors">
-                <div className="font-bold text-kayjay-blue">
+                <div className="font-bold text-kayjay-green">
                    <SearchHighlight text={result.title} highlight={searchTerm} />
                 </div>
                 <p className="text-sm text-gray-600">
@@ -164,9 +211,9 @@ const Header: React.FC = () => {
         <div className="bg-kayjay-dark-gray text-white h-[44px]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full">
             <div className="flex items-center space-x-4 text-sm">
-              <a href="tel:+94112522302" className="flex items-center space-x-2 hover:text-kayjay-gold transition-colors">
+              <a href="tel:+94722249254" className="flex items-center space-x-2 hover:text-kayjay-gold transition-colors">
                 <PhoneIcon className="h-4 w-4" />
-                <span>+94 (11) 252 2302</span>
+                <span>+94 (72) 224 9254</span>
               </a>
               <a href="mailto:sales@kayjay-group.com" className="hidden sm:flex items-center space-x-2 hover:text-kayjay-gold transition-colors">
                 <MailIcon className="h-4 w-4" />
@@ -204,7 +251,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Main Navigation */}
-        <div id="main-nav" className="bg-kayjay-blue shadow-lg">
+        <div id="main-nav" className="bg-kayjay-green shadow-lg">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-20">
               <div className="flex-shrink-0">
@@ -234,7 +281,7 @@ const Header: React.FC = () => {
                         <div className="bg-white rounded-lg shadow-2xl p-8 grid grid-cols-3 gap-8">
                           {link.megaMenu.map(section => (
                             <div key={section.heading}>
-                              <h3 className="font-bold text-kayjay-blue mb-4">{section.heading}</h3>
+                              <h3 className="font-bold text-kayjay-green mb-4">{section.heading}</h3>
                               <ul className="space-y-3">
                                 {section.links.map(subLink => (
                                   <li key={subLink.name}>
@@ -258,10 +305,11 @@ const Header: React.FC = () => {
                       key={link.name}
                       to={link.path}
                       end={link.path === '/'}
-                      style={({ isActive }) =>
-                        isActive ? activeLinkStyle : { color: 'white' }
+                      className={({ isActive }) =>
+                        `hover:text-kayjay-gold px-2 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition-colors ${
+                          isActive ? 'text-kayjay-gold' : 'text-white'
+                        }`
                       }
-                      className="hover:text-kayjay-gold px-2 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition-colors"
                     >
                       {link.name}
                     </NavLink>
@@ -270,7 +318,7 @@ const Header: React.FC = () => {
               </nav>
 
               <div className="hidden lg:flex items-center">
-                <Link to="/request-a-quote" className="bg-kayjay-gold text-kayjay-blue font-bold py-2 px-5 rounded-full text-sm hover:bg-yellow-400 transition-transform transform hover:scale-105">
+                <Link to="/request-a-quote" className="bg-kayjay-gold text-kayjay-green font-bold py-2 px-5 rounded-full text-sm hover:bg-yellow-400 transition-transform transform hover:scale-105">
                   Request a Quote
                 </Link>
               </div>
@@ -290,7 +338,7 @@ const Header: React.FC = () => {
 
            {/* Mobile Menu Panel */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden bg-kayjay-blue border-t border-gray-700">
+            <div className="lg:hidden bg-kayjay-green border-t border-gray-700">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navLinks.map((link) => (
                   link.megaMenu ? (
@@ -331,17 +379,18 @@ const Header: React.FC = () => {
                       to={link.path}
                       onClick={closeMobileMenu}
                       end={link.path === '/'}
-                      style={({ isActive }) =>
-                        isActive ? activeLinkStyle : { color: 'white' }
+                      className={({ isActive }) =>
+                        `hover:text-kayjay-gold block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider ${
+                          isActive ? 'text-kayjay-gold' : 'text-white'
+                        }`
                       }
-                      className="hover:text-kayjay-gold block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider"
                     >
                       {link.name}
                     </NavLink>
                   )
                 ))}
                 <div className="pt-4 px-3">
-                    <Link to="/request-a-quote" onClick={closeMobileMenu} className="block w-full text-center bg-kayjay-gold text-kayjay-blue font-bold py-2 px-5 rounded-full text-base hover:bg-yellow-400 transition-colors">
+                    <Link to="/request-a-quote" onClick={closeMobileMenu} className="block w-full text-center bg-kayjay-gold text-kayjay-green font-bold py-2 px-5 rounded-full text-base hover:bg-yellow-400 transition-colors">
                       Request a Quote
                     </Link>
                 </div>
@@ -373,7 +422,7 @@ const Header: React.FC = () => {
                       className="block w-full border border-gray-300 rounded-full py-3 pl-14 pr-14 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold"
                   />
                   <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                      <button onClick={closeSearch} className="text-gray-500 hover:text-kayjay-blue p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-blue">
+                      <button onClick={closeSearch} className="text-gray-500 hover:text-kayjay-green p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-green">
                           <CloseIcon className="h-6 w-6" />
                           <span className="sr-only">Close search</span>
                       </button>

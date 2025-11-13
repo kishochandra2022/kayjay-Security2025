@@ -1,22 +1,21 @@
-
 import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import BranchNetworkMap from '../components/BranchNetworkMap';
 
 const ContactInfoCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
   <div className="bg-white p-8 rounded-lg shadow-lg text-center h-full">
-    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-6">
+    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-6">
       {icon}
     </div>
-    <h3 className="text-xl font-bold text-kayjay-blue mb-3">{title}</h3>
+    <h3 className="text-xl font-bold text-kayjay-green mb-3">{title}</h3>
     <div className="text-gray-600 space-y-1">{children}</div>
   </div>
 );
 
-const contactInfo = [
-    { title: "Head Office", icon: <FaMapMarkerAlt className="h-8 w-8" />, content: <><p>618, Aluthmawatha Road,</p><p>Colombo 15, Sri Lanka</p></> },
-    { title: "Phone", icon: <FaPhoneAlt className="h-8 w-8" />, content: <><p><a href="tel:+94112522302" className="hover:text-kayjay-gold">+94 (11) 252 2302</a></p><p><a href="tel:+94112529242" className="hover:text-kayjay-gold">+94 (11) 252 9242</a></p><p><a href="tel:+94112526060" className="hover:text-kayjay-gold">+94 (11) 252 6060</a></p><p><a href="tel:+94114891888" className="hover:text-kayjay-gold">+94 (11) 489 1888</a></p></> },
+const generalContactInfo = [
+    { title: "Phone", icon: <FaPhoneAlt className="h-8 w-8" />, content: <><p><a href="tel:+94722249254" className="hover:text-kayjay-gold font-bold">+94 (72) 224 9254 (Hotline)</a></p><p><a href="tel:+94112522302" className="hover:text-kayjay-gold">+94 (11) 252 2302</a></p><p><a href="tel:+94112529242" className="hover:text-kayjay-gold">+94 (11) 252 9242</a></p><p><a href="tel:+94112526060" className="hover:text-kayjay-gold">+94 (11) 252 6060</a></p><p><a href="tel:+94114891888" className="hover:text-kayjay-gold">+94 (11) 489 1888</a></p></> },
     { title: "Email", icon: <FaEnvelope className="h-8 w-8" />, content: <><p><a href="mailto:kayjay@kayjay-group.com" className="hover:text-kayjay-gold">kayjay@kayjay-group.com</a></p><p><a href="mailto:sales@kayjay-group.com" className="hover:text-kayjay-gold">sales@kayjay-group.com</a></p><p><a href="mailto:marketing@kayjay-group.com" className="hover:text-kayjay-gold">marketing@kayjay-group.com</a></p></> },
 ];
 
@@ -32,6 +31,7 @@ const ContactPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [serverMessage, setServerMessage] = useState<string | null>(null);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = e.target;
@@ -42,14 +42,48 @@ const ContactPage: React.FC = () => {
       ...prevState,
       [name]: value,
     }));
+    if (errors[name]) {
+      setErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+    }
+  };
+
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[\d\s-]{10,15}$/;
+
+    if (!formState.name.trim()) newErrors.name = 'Full Name is required.';
+    
+    if (!formState.email.trim()) {
+        newErrors.email = 'Email Address is required.';
+    } else if (!emailRegex.test(formState.email)) {
+        newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (formState.requestCall && !formState.phone.trim()) {
+        newErrors.phone = 'Phone Number is required for a call back.';
+    } else if (formState.phone.trim() && !phoneRegex.test(formState.phone)) {
+        newErrors.phone = 'Please enter a valid phone number.';
+    }
+
+    if (!formState.subject.trim()) newErrors.subject = 'Subject is required.';
+    if (!formState.message.trim()) newErrors.message = 'Message is required.';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setServerMessage(null);
 
-    const formData = new FormData(e.target as HTMLFormElement);
+    if (!validate()) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    const formData = new FormData();
     formData.append('name', formState.name);
     formData.append('email', formState.email);
     formData.append('phone', formState.phone);
@@ -89,8 +123,10 @@ const ContactPage: React.FC = () => {
 
       <section className="py-16 md:py-24 bg-kayjay-light-gray">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {contactInfo.map((info, index) => (
+          
+          {/* General Contact Info */}
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-24">
+            {generalContactInfo.map((info, index) => (
                 <div key={info.title} data-aos="fade-up" data-aos-delay={index * 100}>
                     <ContactInfoCard title={info.title} icon={info.icon}>
                         {info.content}
@@ -98,32 +134,82 @@ const ContactPage: React.FC = () => {
                 </div>
             ))}
           </div>
-          
-          <div className="mt-16 md:mt-24" data-aos="fade-up">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Find Us Here</h2>
-              <p className="text-lg text-gray-700">Visit our head office in Colombo for a personal consultation.</p>
-            </div>
-            <div className="rounded-lg shadow-2xl overflow-hidden">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!3m2!1sen!2slk!4v1761888387711!5m2!1sen!2slk!6m8!1m7!1siKYUudPD3zcQ1_SK83BApw!2m2!1d6.96368666818841!2d79.86851459127769!3f311.48483!4f0!5f0.7820865974627469" 
-                    width="100%" 
-                    height="450" 
-                    style={{ border: 0 }} 
-                    allowFullScreen={true} 
-                    loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="KayJay Security Head Office Location"
-                ></iframe>
-            </div>
+
+          {/* Office Locations */}
+          <div className="text-center mb-12" data-aos="fade-up">
+              <h2 className="text-3xl font-bold text-kayjay-green mb-4">Our Offices</h2>
+              <p className="text-lg text-gray-700">Visit us for a personal consultation.</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              
+              {/* Head Office */}
+              <div data-aos="fade-up" data-aos-delay="100">
+                  <div className="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col">
+                      <div className="flex items-start mb-4">
+                          <FaMapMarkerAlt className="h-8 w-8 text-kayjay-green mr-4 mt-1 flex-shrink-0"/>
+                          <div>
+                              <h3 className="text-2xl font-bold text-kayjay-green">Head Office</h3>
+                              <address className="not-italic text-gray-600">
+                                  618, Aluthmawatha Road,<br/>
+                                  Colombo 15, Sri Lanka.
+                              </address>
+                          </div>
+                      </div>
+                      <a href="https://www.google.com/maps/search/?api=1&query=Kay+Jay+Group+Colombo+15" target="_blank" rel="noopener noreferrer" className="font-bold text-kayjay-gold hover:underline mb-6 inline-block">View on Map</a>
+                      <div className="rounded-lg shadow-xl overflow-hidden aspect-video mt-auto">
+                          <iframe 
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.297433890332!2d79.86593967499708!3d6.963691993033588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2585675555555%3A0x199343336a538260!2sKay%20Jay%20Group!5e0!3m2!1sen!2slk!4v1722442253389!5m2!1sen!2slk" 
+                              width="100%" 
+                              height="100%" 
+                              style={{ border: 0 }} 
+                              allowFullScreen={true} 
+                              loading="lazy" 
+                              referrerPolicy="no-referrer-when-downgrade"
+                              title="KayJay Security Head Office Location"
+                          ></iframe>
+                      </div>
+                  </div>
+              </div>
+
+              {/* Corporate Office */}
+              <div data-aos="fade-up" data-aos-delay="200">
+                  <div className="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col">
+                      <div className="flex items-start mb-4">
+                          <FaMapMarkerAlt className="h-8 w-8 text-kayjay-green mr-4 mt-1 flex-shrink-0"/>
+                          <div>
+                              <h3 className="text-2xl font-bold text-kayjay-green">Corporate Office</h3>
+                              <address className="not-italic text-gray-600">
+                                  No 337/A, Rajagiriya Rd,<br/>
+                                  Nawala, Sri Lanka.
+                              </address>
+                          </div>
+                      </div>
+                      <a href="https://www.google.com/maps/search/?api=1&query=Kay+Jay+Security+Nawala" target="_blank" rel="noopener noreferrer" className="font-bold text-kayjay-gold hover:underline mb-6 inline-block">View on Map</a>
+                      <div className="rounded-lg shadow-xl overflow-hidden aspect-video mt-auto">
+                          <iframe 
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.028972621003!2d79.90159297499616!3d6.88673399311101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25a2b55555555%3A0x2db401a5573752e!2sKay%20Jay%20Security!5e0!3m2!1sen!2slk!4v1722442345631!5m2!1sen!2slk" 
+                              width="100%" 
+                              height="100%" 
+                              style={{ border: 0 }} 
+                              allowFullScreen={true} 
+                              loading="lazy" 
+                              referrerPolicy="no-referrer-when-downgrade"
+                              title="KayJay Security Corporate Office Location"
+                          ></iframe>
+                      </div>
+                  </div>
+              </div>
+
           </div>
         </div>
       </section>
 
+      <BranchNetworkMap />
+
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
-              <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold text-kayjay-green mb-4">Send Us a Message</h2>
               <p className="text-lg text-gray-700">Feel free to send us your project details. We’ll respond promptly with a tailored proposal for top security solutions to meet your requirements.</p>
             </div>
             
@@ -142,11 +228,13 @@ const ContactPage: React.FC = () => {
                   )}
                   <div className="sm:col-span-1">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input type="text" name="name" id="name" required value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div className="sm:col-span-1">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input type="email" name="email" id="email" required value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                   <div className="sm:col-span-1">
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number {formState.requestCall ? <span className="text-red-500">*</span> : '(Optional)'}</label>
@@ -158,10 +246,12 @@ const ContactPage: React.FC = () => {
                       onChange={handleChange} 
                       required={formState.requestCall}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                      {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
                    <div className="sm:col-span-1">
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
-                    <input type="text" name="subject" id="subject" required value={formState.subject} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="text" name="subject" id="subject" value={formState.subject} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
                   </div>
                   <div className="sm:col-span-2">
                     <div className="flex items-center">
@@ -171,7 +261,7 @@ const ContactPage: React.FC = () => {
                         type="checkbox"
                         checked={formState.requestCall}
                         onChange={handleChange}
-                        className="h-4 w-4 text-kayjay-blue border-gray-300 rounded focus:ring-kayjay-gold"
+                        className="h-4 w-4 text-kayjay-green border-gray-300 rounded focus:ring-kayjay-gold"
                       />
                       <label htmlFor="requestCall" className="ml-3 block text-sm font-medium text-gray-700">
                         Request a call back
@@ -180,10 +270,11 @@ const ContactPage: React.FC = () => {
                   </div>
                   <div className="sm:col-span-2">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                    <textarea name="message" id="message" rows={5} required value={formState.message} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold"></textarea>
+                    <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold"></textarea>
+                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                   </div>
                    <div className="sm:col-span-2 text-right">
-                    <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-kayjay-blue bg-kayjay-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-yellow-300 disabled:cursor-not-allowed">
+                    <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-kayjay-green bg-kayjay-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-yellow-300 disabled:cursor-not-allowed">
                       {isLoading ? 'Submitting...' : 'Submit Inquiry'}
                     </button>
                   </div>

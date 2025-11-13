@@ -37,7 +37,6 @@ const App: React.FC = () => {
           <Route path="/request-a-quote" element={<QuotePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/security-personnel" element={<SecurityPersonnelPage />} />
-          {/* A simple catch-all route for 404s can redirect home */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

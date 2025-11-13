@@ -24,30 +24,66 @@ const CareersPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [serverMessage, setServerMessage] = useState<string | null>(null);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState(prevState => ({ ...prevState, [name]: value }));
+    if (errors[name]) {
+      setErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+    }
   };
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setCvFile(e.target.files[0]);
+       if (errors.cvFile) {
+        setErrors(prevErrors => ({...prevErrors, cvFile: ''}));
+      }
     }
+  };
+
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[\d\s-]{10,15}$/;
+
+    if (!formState.name.trim()) newErrors.name = 'Full Name is required.';
+    
+    if (!formState.email.trim()) {
+      newErrors.email = 'Email Address is required.';
+    } else if (!emailRegex.test(formState.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formState.phone.trim()) {
+        newErrors.phone = 'Phone Number is required.';
+    } else if (!phoneRegex.test(formState.phone)) {
+        newErrors.phone = 'Please enter a valid phone number.';
+    }
+
+    if (!cvFile) {
+        newErrors.cvFile = 'CV file is required. Please upload your CV.';
+    } else if (cvFile.size > 5 * 1024 * 1024) { // 5MB limit
+        newErrors.cvFile = 'File size must be less than 5MB.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!cvFile) {
-        setServerMessage('CV file is required. Please upload your CV.');
-        return;
+    setServerMessage(null);
+    
+    if (!validate()) {
+      return;
     }
 
     setIsLoading(true);
-    setServerMessage(null);
 
-    const formData = new FormData(e.target as HTMLFormElement);
+    const formData = new FormData();
     formData.append('name', formState.name);
     formData.append('email', formState.email);
     formData.append('phone', formState.phone);
@@ -94,7 +130,7 @@ const CareersPage: React.FC = () => {
             
             {/* Opportunities */}
             <div className="bg-kayjay-light-gray p-8 rounded-lg" data-aos="fade-up" data-aos-delay="0">
-              <h3 className="text-2xl font-bold text-kayjay-blue mb-6">Opportunities for Security Guards in Sri Lanka</h3>
+              <h3 className="text-2xl font-bold text-kayjay-green mb-6">Opportunities for Security Guards in Sri Lanka</h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center"><span className="text-kayjay-gold mr-3">◆</span> Professional Security Guard</li>
                 <li className="flex items-center"><span className="text-kayjay-gold mr-3">◆</span> Surveillance & Technical Support</li>
@@ -105,7 +141,7 @@ const CareersPage: React.FC = () => {
             
             {/* Requirements */}
             <div className="bg-kayjay-light-gray p-8 rounded-lg" data-aos="fade-up" data-aos-delay="100">
-              <h3 className="text-2xl font-bold text-kayjay-blue mb-6">Requirements</h3>
+              <h3 className="text-2xl font-bold text-kayjay-green mb-6">Requirements</h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center"><span className="text-kayjay-gold mr-3">◆</span> Clean background record</li>
                 <li className="flex items-center"><span className="text-kayjay-gold mr-3">◆</span> Basic physical fitness</li>
@@ -119,7 +155,7 @@ const CareersPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-kayjay-blue text-white">
+      <section className="py-16 md:py-24 bg-kayjay-green text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
                 <h2 className="text-3xl font-bold mb-4">Apply Now</h2>
@@ -141,15 +177,18 @@ const CareersPage: React.FC = () => {
                   )}
                   <div className="sm:col-span-1">
                     <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
-                    <input type="text" name="name" id="name" required value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div className="sm:col-span-1">
                     <label htmlFor="email" className="block text-sm font-medium">Email Address</label>
-                    <input type="email" name="email" id="email" required value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                   <div className="sm:col-span-1">
                     <label htmlFor="phone" className="block text-sm font-medium">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" required value={formState.phone} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="tel" name="phone" id="phone" value={formState.phone} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
                    <div className="sm:col-span-1">
                     <label htmlFor="position" className="block text-sm font-medium">Position Applied For</label>
@@ -163,9 +202,9 @@ const CareersPage: React.FC = () => {
                         <div className="space-y-1 text-center">
                             <FaUpload className="mx-auto h-12 w-12 text-gray-400" />
                             <div className="flex text-sm text-gray-600">
-                                <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-kayjay-blue hover:text-kayjay-gold focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-kayjay-gold">
+                                <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-kayjay-green hover:text-kayjay-gold focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-kayjay-gold">
                                     <span>Upload a file</span>
-                                    <input id="file-upload" name="cvFile" type="file" ref={fileInputRef} onChange={handleFileChange} className="sr-only" accept=".pdf,.doc,.docx" required />
+                                    <input id="file-upload" name="cvFile" type="file" ref={fileInputRef} onChange={handleFileChange} className="sr-only" accept=".pdf,.doc,.docx" />
                                 </label>
                                 <p className="pl-1">or drag and drop</p>
                             </div>
@@ -173,13 +212,14 @@ const CareersPage: React.FC = () => {
                             {cvFile && <p className="text-sm font-semibold text-green-600 pt-2">Selected: {cvFile.name}</p>}
                         </div>
                      </div>
+                     {errors.cvFile && <p className="text-red-500 text-sm mt-1">{errors.cvFile}</p>}
                    </div>
                   <div className="sm:col-span-2">
                     <label htmlFor="coverLetter" className="block text-sm font-medium">Cover Letter (Optional)</label>
                     <textarea name="coverLetter" id="coverLetter" rows={5} value={formState.coverLetter} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold"></textarea>
                   </div>
                    <div className="sm:col-span-2 text-right">
-                    <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-white bg-kayjay-blue hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-kayjay-blue/50 disabled:cursor-not-allowed">
+                    <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-white bg-kayjay-green hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-kayjay-green/50 disabled:cursor-not-allowed">
                       {isLoading ? 'Submitting...' : 'Submit Application'}
                     </button>
                   </div>

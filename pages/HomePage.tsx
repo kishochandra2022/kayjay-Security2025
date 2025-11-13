@@ -1,19 +1,18 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HeroCarousel from '../components/HeroCarousel';
 import Seo from '../components/Seo';
 import { FaCheck, FaShieldAlt, FaUserShield, FaThLarge, FaHandshake, FaTruck, FaTv, FaCertificate, FaStore, FaShippingFast } from 'react-icons/fa';
+import BranchNetworkMap from '../components/BranchNetworkMap';
 
 const ServiceCard: React.FC<{ title: string; description: string; path: string; icon: React.ReactNode; delay: number }> = ({ title, description, path, icon, delay }) => (
   <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full" data-aos="fade-up" data-aos-delay={delay}>
-    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-6 flex-shrink-0">
+    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-6 flex-shrink-0">
       {icon}
     </div>
-    <h3 className="text-2xl font-bold text-kayjay-blue mb-4 text-center">{title}</h3>
+    <h3 className="text-2xl font-bold text-kayjay-green mb-4 text-center">{title}</h3>
     <p className="text-gray-600 text-center flex-grow">{description}</p>
     <div className="mt-6 text-center">
-      <Link to={path} className="font-bold text-kayjay-blue hover:text-kayjay-gold transition-colors">
+      <Link to={path} className="font-bold text-kayjay-green hover:text-kayjay-gold transition-colors">
         Learn More &rarr;
       </Link>
     </div>
@@ -69,39 +68,55 @@ const HomePage: React.FC = () => {
         imageUrl="https://picsum.photos/1200/630?random=10"
       />
       
-      {/* Hero Section */}
-      <HeroCarousel />
+      {/* Hero Video Section */}
+      <section className="relative w-full overflow-hidden cursor-pointer">
+        <Link to="/solutions" aria-label="View our solutions" className="block">
+          <video
+            className="w-full h-auto block"
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label="Promotional video for KayJay Security"
+          >
+            Your browser does not support the video tag.
+          </video>
+          {/* Overlay to indicate interactivity */}
+          <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-colors duration-300 z-10"></div>
+        </Link>
+      </section>
 
       {/* Why KayJay Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue">Why Choose Sri Lanka's No.1 Security Service Provider?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-green">Why Choose Sri Lanka's No.1 Security Service Provider?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="p-6" data-aos="zoom-in" data-aos-delay="0">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-blue mb-6">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-green mb-6">
                 <FaShieldAlt className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Integrated Security Solutions</h3>
               <p className="text-gray-600">Combining professional security guards with electronic systems to deliver effective, high-quality security solutions.</p>
             </div>
             <div className="p-6" data-aos="zoom-in" data-aos-delay="100">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-blue mb-6">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-green mb-6">
                 <FaUserShield className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Trained Personnel</h3>
               <p className="text-gray-600">Well-trained, professional security guards, vetted and certified for your peace of mind.</p>
             </div>
             <div className="p-6" data-aos="zoom-in" data-aos-delay="200">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-blue mb-6">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-green mb-6">
                 <FaThLarge className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Full Spectrum of Services</h3>
               <p className="text-gray-600">Top security solutions including surveillance, access control, guard services, cash transit & more.</p>
             </div>
             <div className="p-6" data-aos="zoom-in" data-aos-delay="300">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-blue mb-6">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-light-gray text-kayjay-green mb-6">
                 <FaHandshake className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Trusted By Sri Lanka's Top Businesses</h3>
@@ -115,7 +130,7 @@ const HomePage: React.FC = () => {
       <section className="py-20 bg-kayjay-light-gray">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12" data-aos="fade-up">
-                  <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue">Explore Our Core Security Solutions</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-kayjay-green">Explore Our Core Security Solutions</h2>
                   <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
                       From manned guarding to advanced technological integrations, we provide comprehensive security services tailored to your needs.
                   </p>
@@ -135,39 +150,11 @@ const HomePage: React.FC = () => {
           </div>
       </section>
 
-      {/* Intro Video Section */}
-      <section className="py-20 bg-kayjay-blue text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12" data-aos="fade-up">
-                <h2 className="text-3xl md:text-4xl font-bold">Experience Our Commitment in Action</h2>
-                <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-                    A glimpse into the professionalism and dedication that define KayJay Security.
-                </p>
-            </div>
-            <div className="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                <div className="rounded-lg shadow-2xl overflow-hidden aspect-video">
-                    <video
-                        className="w-full h-full object-cover"
-                        src="https://www.w3schools.com/html/mov_bbb.mp4" 
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        aria-label="Promotional video for KayJay Security"
-                    >
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        </div>
-      </section>
-
       {/* Our Promise Section */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue mb-4">Our Promise of Protection</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-green mb-4">Our Promise of Protection</h2>
             <p className="text-lg text-gray-700 mb-6">At KayJay, Sri Lanka's leading private security company, we are built on a foundation of trust and a commitment to excellence. Our promise is simple yet profound.</p>
             <div className="space-y-4">
               <div className="flex items-center">
@@ -183,7 +170,7 @@ const HomePage: React.FC = () => {
                 <span className="text-xl font-semibold">Peace of Mind.</span>
               </div>
             </div>
-            <Link to="/contact" className="mt-8 inline-block bg-kayjay-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-900 transition-colors">
+            <Link to="/contact" className="mt-8 inline-block bg-kayjay-green text-white font-bold py-3 px-6 rounded-lg hover:bg-kayjay-green/90 transition-colors">
               Contact Us Today
             </Link>
           </div>
@@ -192,6 +179,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <BranchNetworkMap />
+
     </div>
   );
 };

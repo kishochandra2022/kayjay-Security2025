@@ -7,10 +7,10 @@ import { FaShieldAlt, FaUsers, FaTrophy, FaBullseye, FaClipboardCheck, FaMicroch
 
 const DifferentiatorCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
     <div className="bg-white p-8 rounded-lg shadow-lg text-center h-full">
-      <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-6">
+      <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-6">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-kayjay-blue mb-3">{title}</h3>
+      <h3 className="text-xl font-bold text-kayjay-green mb-3">{title}</h3>
       <p className="text-gray-600">{children}</p>
     </div>
 );

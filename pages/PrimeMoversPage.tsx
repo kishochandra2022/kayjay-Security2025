@@ -6,10 +6,10 @@ import { FaShieldAlt, FaDollarSign, FaBox, FaWeightHanging, FaTrophy, FaHandshak
 
 const FeatureCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
     <div className="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300 h-full">
-      <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-5">
+      <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-5">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-kayjay-blue mb-3">{title}</h3>
+      <h3 className="text-xl font-bold text-kayjay-green mb-3">{title}</h3>
       <p className="text-gray-600 text-sm">{children}</p>
     </div>
 );
@@ -44,7 +44,7 @@ const PrimeMoversPage: React.FC = () => {
                                 <img src="https://picsum.photos/800/600?random=6" alt="A large transportation truck from KayJay Prime Movers, part of a leading security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                             <div>
-                                <h2 className="text-3xl font-bold text-kayjay-blue mb-4">A Legacy of Trust, A Future in Motion</h2>
+                                <h2 className="text-3xl font-bold text-kayjay-green mb-4">A Legacy of Trust, A Future in Motion</h2>
                                 <div className="text-gray-700 space-y-4">
                                     <p>
                                     Gaining over 40 years of experience, Kayjay Group has become an iconic name in Security. We are a modern, vision-driven, and fast developing group of companies. Now we have move forward with transportation services in Sri Lanka. We offer a wide range of logistical services to meet the complex needs of companies.
@@ -58,7 +58,7 @@ const PrimeMoversPage: React.FC = () => {
                     </div>
 
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
-                        <h2 className="text-3xl font-bold text-center text-kayjay-blue mb-12">Our Commitment to Excellence</h2>
+                        <h2 className="text-3xl font-bold text-center text-kayjay-green mb-12">Our Commitment to Excellence</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                             {features.map((feature, index) => (
                                 <div key={feature.title} data-aos-delay={index * 100}>
@@ -72,7 +72,7 @@ const PrimeMoversPage: React.FC = () => {
 
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="text-center">
-                            <h2 className="text-3xl font-bold text-kayjay-blue mb-10">Key Clients</h2>
+                            <h2 className="text-3xl font-bold text-kayjay-green mb-10">Key Clients</h2>
                             <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-gray-600">
                                 <p className="text-xl font-semibold">Jacobi Carbons Lanka (Pvt) Ltd</p>
                                 <p className="text-xl font-semibold">Dart Global Logistics (Pvt) Ltd</p>

@@ -20,10 +20,10 @@ import {
 
 const ServiceCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
   <div className="bg-kayjay-light-gray p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center h-full">
-    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-5 flex-shrink-0">
+    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-5 flex-shrink-0">
       {icon}
     </div>
-    <h3 className="text-xl font-bold text-kayjay-blue mb-3">{title}</h3>
+    <h3 className="text-xl font-bold text-kayjay-green mb-3">{title}</h3>
     <p className="text-gray-600">{children}</p>
   </div>
 );
@@ -84,7 +84,7 @@ const CashTransitPage: React.FC = () => {
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div>
-                                <h2 className="text-3xl font-bold text-kayjay-blue mb-4">Total Cash Management Solutions</h2>
+                                <h2 className="text-3xl font-bold text-kayjay-green mb-4">Total Cash Management Solutions</h2>
                                 <p className="text-lg text-gray-700 mb-6">KayJay Security Services provides total cash management solutions that protect the valuable cash during logistics. KayJay Cash Solutions combines everything we know about cash handling and security. Our infrastructure is more secure, our technology’s smarter and our partnerships with banks are deeper.</p>
                                 <p className="text-gray-700">It all comes together to keep your cash flowing smoothly, swiftly and safely around your business. We will take care to handle cash in a reliable way. The cash services segment is gradually evolving as a key and fast-growing service offering within the private security services industry.</p>
                             </div>
@@ -95,7 +95,7 @@ const CashTransitPage: React.FC = () => {
                     </div>
 
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
-                        <h2 className="text-3xl font-bold text-center text-kayjay-blue mb-12">Our Cash Transit Services</h2>
+                        <h2 className="text-3xl font-bold text-center text-kayjay-green mb-12">Our Cash Transit Services</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {services.map((service, index) => (
                                 <div key={service.title} data-aos-delay={index * 100}>
@@ -109,16 +109,16 @@ const CashTransitPage: React.FC = () => {
 
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-blue">Why Choose KayJay Cash Services?</h2>
+                            <h2 className="text-3xl md:text-4xl font-bold text-kayjay-green">Why Choose KayJay Cash Services?</h2>
                             <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Kayjay having the experience in providing cash handling facilities for many years have now geared our services with modern technology of GPS tracking of all the vehicles involved in cash operations. This will enable us as to monitor the vehicle movements at any given time of the day. For all our personal who are in the cash management team we have obtained a due diligence by our personal division. We will make sure the right money is safer in the right place at the right time.</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
                             {benefits.map((benefit, index) => (
                                 <div key={benefit.title} data-aos-delay={index * 100} className="bg-kayjay-light-gray p-6 rounded-lg shadow-md text-center">
-                                     <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-blue text-kayjay-gold mb-5">
+                                     <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-kayjay-green text-kayjay-gold mb-5">
                                         {benefit.icon}
                                     </div>
-                                    <h3 className="text-xl font-bold text-kayjay-blue mb-2">{benefit.title}</h3>
+                                    <h3 className="text-xl font-bold text-kayjay-green mb-2">{benefit.title}</h3>
                                     <p className="text-gray-600 text-sm">{benefit.description}</p>
                                 </div>
                             ))}
@@ -132,11 +132,11 @@ const CashTransitPage: React.FC = () => {
                             </div>
                             <div className="order-1 md:order-2">
                                 <div className="flex items-center mb-4">
-                                    <FaBuilding className="h-10 w-10 text-kayjay-blue mr-4"/>
-                                    <h2 className="text-3xl font-bold text-kayjay-blue">State-of-the-Art Vault Facility</h2>
+                                    <FaBuilding className="h-10 w-10 text-kayjay-green mr-4"/>
+                                    <h2 className="text-3xl font-bold text-kayjay-green">State-of-the-Art Vault Facility</h2>
                                 </div>
                                 <p className="text-gray-700 mb-6">We operate an in-house vault constructed to UL Class 2-6 standards with an Alpha door. Our total facility includes collection of funds, sorting, bundling, transferring to the Central Bank, and holding the balance in our vault overnight. Our 24/7 Central Monitoring Station (CMS) links CCTV, GPS, and alarms to a central location for integrated safety, ready to dispatch a special armed guard service team and communicate with police, hospitals, and fire stations in an emergency.</p>
-                                <h3 className="text-2xl font-bold text-kayjay-blue mb-4">The Vault Security System</h3>
+                                <h3 className="text-2xl font-bold text-kayjay-green mb-4">The Vault Security System</h3>
                                  <ul className="space-y-3 text-gray-700">
                                     {vaultFeatures.map(feature => (
                                         <IconListItem key={feature}>{feature}</IconListItem>

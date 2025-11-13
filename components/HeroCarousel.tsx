@@ -85,7 +85,7 @@ const HeroCarousel: React.FC = () => {
             aria-label={`${index + 1} of ${slides.length}`}
           >
             <img src={slide.image} alt={slide.alt} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-kayjay-blue bg-opacity-60"></div>
+            <div className="absolute inset-0 bg-kayjay-green bg-opacity-60"></div>
           </div>
         ))}
       </div>
@@ -102,10 +102,10 @@ const HeroCarousel: React.FC = () => {
                   {slide.description}
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link to="/request-a-quote" className="bg-kayjay-gold text-kayjay-blue font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-transform transform hover:scale-105 w-full sm:w-auto">
+                  <Link to="/request-a-quote" className="bg-kayjay-gold text-kayjay-green font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-transform transform hover:scale-105 w-full sm:w-auto">
                     Get a Quotation
                   </Link>
-                  <Link to="/solutions" className="border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-kayjay-blue transition-colors w-full sm:w-auto">
+                  <Link to="/solutions" className="border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-kayjay-green transition-colors w-full sm:w-auto">
                     Our Solutions
                   </Link>
                 </div>
