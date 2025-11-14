@@ -69,8 +69,9 @@ const CashTransitPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Secure Cash Transit Services in Sri Lanka"
-        description="Secure your assets with our professional cash transit and management solutions. As a trusted security provider in Sri Lanka, we offer armed escorts, secure vehicles, and real-time tracking."
+        title="Secure Cash Transit & Management Services in Sri Lanka"
+        description="Secure your assets with our professional cash transit and management solutions. As a trusted security provider in Sri Lanka, we offer armored vehicle services, ATM replenishment, and more."
+        keywords="cash transit sri lanka, cash in transit, armored vehicle services, secure cash management, atm replenishment"
         imageUrl="https://picsum.photos/1200/630?random=5"
       />
       <PageHeader title="Cash Transit & Cash Management" subtitle="Secure solutions from a trusted security provider that safeguard your cash assets through every link of the chain." />

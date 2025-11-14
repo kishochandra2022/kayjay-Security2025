@@ -26,12 +26,13 @@ const BranchNetworkMap: React.FC = () => {
     // Initialize map only once
     if (!mapRef.current || mapInstance.current) return;
 
-    // Initialize map with zoom controls disabled
+    // Initialize map with interactions disabled
     const map = L.map(mapRef.current, {
         zoomControl: false,
         scrollWheelZoom: false,
         doubleClickZoom: false,
         touchZoom: false,
+        dragging: false, // Disable map dragging
     });
     mapInstance.current = map;
 
@@ -46,11 +47,15 @@ const BranchNetworkMap: React.FC = () => {
       [9.84, 81.88]  // Northeast corner
     ];
 
-    // Fit map to Sri Lanka bounds and lock the view
+    // Fit map to Sri Lanka bounds
     map.fitBounds(bounds);
+
+    // Zoom out slightly to ensure map edges are not cut off, and lock it
+    const newZoom = map.getZoom() - 0.2;
+    map.setZoom(newZoom);
     map.setMaxBounds(bounds);
-    map.setMinZoom(map.getZoom());
-    map.setMaxZoom(map.getZoom());
+    map.setMinZoom(newZoom);
+    map.setMaxZoom(newZoom);
 
     // Create a custom pulsing icon using L.divIcon
     const pulsingIcon = L.divIcon({

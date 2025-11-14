@@ -28,8 +28,9 @@ const ServicesPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Top Security Solutions in Sri Lanka"
-        description="Explore a wide spectrum of professional security services in Sri Lanka, including professional security guards, electronic security, and cash transit from the nation's No.1 security provider."
+        title="Comprehensive Security Solutions in Sri Lanka"
+        description="Explore a full spectrum of security services in Sri Lanka by KayJay, the nation's trusted provider. From professional security guards to electronic surveillance, we have you covered."
+        keywords="security solutions sri lanka, professional security guards, electronic security, cash transit, security services, manned guarding"
         imageUrl="https://picsum.photos/1200/630?random=3"
       />
       <PageHeader title="Our Top Security Solutions" subtitle="A wide spectrum of professional security services in Sri Lanka to meet both commercial and residential needs." />

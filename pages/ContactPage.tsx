@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
+import ReCaptchaV2 from '../components/ReCaptchaV2';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import BranchNetworkMap from '../components/BranchNetworkMap';
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
 
 const ContactInfoCard: React.FC<{ title: string; children: React.ReactNode; icon: React.ReactNode }> = ({ title, children, icon }) => (
   <div className="bg-white p-8 rounded-lg shadow-lg text-center h-full">
@@ -32,6 +39,7 @@ const ContactPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = e.target;
@@ -69,19 +77,22 @@ const ContactPage: React.FC = () => {
     if (!formState.subject.trim()) newErrors.subject = 'Subject is required.';
     if (!formState.message.trim()) newErrors.message = 'Message is required.';
     
+    if (!recaptchaToken) {
+      newErrors.recaptcha = 'Please verify that you are not a robot.';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setServerMessage(null);
-
     if (!validate()) {
       return;
     }
 
     setIsLoading(true);
+    setServerMessage(null);
 
     const formData = new FormData();
     formData.append('name', formState.name);
@@ -90,6 +101,14 @@ const ContactPage: React.FC = () => {
     formData.append('subject', formState.subject);
     formData.append('message', formState.message);
     formData.append('requestCall', String(formState.requestCall));
+    formData.append('g-recaptcha-response', recaptchaToken!);
+    // Honeypot field
+    const websiteUrl = (e.target as HTMLFormElement).website_url.value;
+    if(websiteUrl) {
+        setIsLoading(false);
+        return;
+    }
+    formData.append('website_url', websiteUrl);
 
     try {
         const response = await fetch('/api/contact-handler.php', {
@@ -103,10 +122,14 @@ const ContactPage: React.FC = () => {
             setSubmitted(true);
         } else {
             setServerMessage(result.message || 'An error occurred. Please try again.');
+            window.grecaptcha.reset();
+            setRecaptchaToken(null);
         }
     } catch (error) {
         console.error('Submission error:', error);
         setServerMessage('An unexpected network error occurred. Please try again later.');
+        window.grecaptcha.reset();
+        setRecaptchaToken(null);
     } finally {
         setIsLoading(false);
     }
@@ -115,8 +138,9 @@ const ContactPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Contact Sri Lanka's Top Security Company"
-        description="Get in touch with KayJay Security. As a leading private security company in Sri Lanka, we are ready to discuss your needs for professional security guards and top security solutions."
+        title="Contact Sri Lanka's Leading Security Company"
+        description="Get in touch with KayJay Security, Sri Lanka's most trusted security provider. Contact us for professional security guards, cash transit services, or a custom security solution."
+        keywords="contact security company, security services contact, kayjay security address, security solutions sri lanka"
         imageUrl="https://picsum.photos/1200/630?random=15"
       />
       <PageHeader title="Contact Us" subtitle="We're here to help. Reach out to Sri Lanka's No.1 security service provider with your needs and we'll respond promptly." />
@@ -179,12 +203,13 @@ const ContactPage: React.FC = () => {
                           <div>
                               <h3 className="text-2xl font-bold text-kayjay-green">Corporate Office</h3>
                               <address className="not-italic text-gray-600">
-                                  No 337/A, Rajagiriya Rd,<br/>
-                                  Nawala, Sri Lanka.
+                                  No 337/A Nawala Rd,<br/>
+                                  Sri Jayawardenepura Kotte,<br/>
+                                  Sri Lanka, 10100.
                               </address>
                           </div>
                       </div>
-                      <a href="https://www.google.com/maps/search/?api=1&query=Kay+Jay+Security+Nawala" target="_blank" rel="noopener noreferrer" className="font-bold text-kayjay-gold hover:underline mb-6 inline-block">View on Map</a>
+                      <a href="https://www.google.com/maps/search/?api=1&query=No+337/A+Nawala+Rd,+Sri+Jayawardenepura+Kotte" target="_blank" rel="noopener noreferrer" className="font-bold text-kayjay-gold hover:underline mb-6 inline-block">View on Map</a>
                       <div className="rounded-lg shadow-xl overflow-hidden aspect-video mt-auto">
                           <iframe 
                               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.028972621003!2d79.90159297499616!3d6.88673399311101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25a2b55555555%3A0x2db401a5573752e!2sKay%20Jay%20Security!5e0!3m2!1sen!2slk!4v1722442345631!5m2!1sen!2slk" 
@@ -220,7 +245,7 @@ const ContactPage: React.FC = () => {
                   <p>Your message has been received. We will get back to you shortly.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                   {serverMessage && (
                     <div className="sm:col-span-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
                       <p>{serverMessage}</p>
@@ -228,12 +253,12 @@ const ContactPage: React.FC = () => {
                   )}
                   <div className="sm:col-span-1">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div className="sm:col-span-1">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                   <div className="sm:col-span-1">
@@ -250,7 +275,7 @@ const ContactPage: React.FC = () => {
                   </div>
                    <div className="sm:col-span-1">
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
-                    <input type="text" name="subject" id="subject" value={formState.subject} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                    <input type="text" name="subject" id="subject" value={formState.subject} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                     {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
                   </div>
                   <div className="sm:col-span-2">
@@ -270,8 +295,20 @@ const ContactPage: React.FC = () => {
                   </div>
                   <div className="sm:col-span-2">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                    <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold"></textarea>
+                    <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required></textarea>
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                  </div>
+                   <div className="sm:col-span-2">
+                    <ReCaptchaV2
+                      sitekey="6LemDAssAAAAAD-Ps5YSndCnz0Wlm89Lq0tJgOYI"
+                      onVerify={(token) => {
+                        setRecaptchaToken(token);
+                        if (errors.recaptcha) {
+                          setErrors(prev => ({...prev, recaptcha: ''}));
+                        }
+                      }}
+                    />
+                    {errors.recaptcha && <p className="text-red-500 text-sm mt-1">{errors.recaptcha}</p>}
                   </div>
                    <div className="sm:col-span-2 text-right">
                     <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-kayjay-green bg-kayjay-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-yellow-300 disabled:cursor-not-allowed">
@@ -279,7 +316,7 @@ const ContactPage: React.FC = () => {
                     </button>
                   </div>
                   {/* Honeypot field for bot protection */}
-                  <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                  <div className="absolute left-[-5000px]" aria-hidden="true">
                     <input type="text" name="website_url" tabIndex={-1} autoComplete="off" />
                   </div>
                 </form>

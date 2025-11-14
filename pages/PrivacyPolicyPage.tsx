@@ -6,8 +6,8 @@ const PrivacyPolicyPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Privacy Policy | KayJay Security"
-        description="Read the privacy policy for KayJay Security. We are committed to protecting your personal information and being transparent about what we collect and how it is used."
+        title="Privacy Policy"
+        description="Read the privacy policy for KayJay Security, a trusted security provider in Sri Lanka. We are committed to protecting your personal information and being transparent about its use."
         imageUrl="https://picsum.photos/1200/630?random=18"
       />
       <PageHeader title="Privacy Policy" subtitle="Our Commitment to Your Privacy" />

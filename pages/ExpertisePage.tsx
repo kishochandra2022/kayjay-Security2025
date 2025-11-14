@@ -35,8 +35,9 @@ const ExpertisePage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Expertise & Training | Professional Security Guards Sri Lanka"
-        description="Discover the expertise that makes us a top security provider in Sri Lanka, including pre-employment checks and extensive training for our professional security guards."
+        title="Security Guard Training & Expertise in Sri Lanka"
+        description="Discover the expertise that makes us a top security provider in Sri Lanka, including pre-employment checks and extensive training programs for our professional security guards."
+        keywords="security guard training sri lanka, security expertise, pre-employment checks, professional security guards, security standards"
         imageUrl="https://picsum.photos/1200/630?random=16"
       />
       <PageHeader 

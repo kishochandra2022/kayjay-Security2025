@@ -2,6 +2,13 @@
 import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
+import ReCaptchaV2 from '../components/ReCaptchaV2';
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
 
 const services = [
   'Manned Guard Services',
@@ -29,6 +36,7 @@ const QuotePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [serverMessage, setServerMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -71,19 +79,22 @@ const QuotePage: React.FC = () => {
         newErrors.phone = 'Please enter a valid phone number.';
     }
 
+    if (!recaptchaToken) {
+      newErrors.recaptcha = 'Please verify that you are not a robot.';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setServerMessage(null);
-
     if (!validate()) {
         return;
     }
 
     setIsLoading(true);
+    setServerMessage(null);
     
     const formData = new FormData();
     formData.append('name', formState.name);
@@ -92,6 +103,14 @@ const QuotePage: React.FC = () => {
     formData.append('phone', formState.phone);
     formData.append('message', formState.message);
     formData.append('services', selectedServices.join(', '));
+    formData.append('g-recaptcha-response', recaptchaToken!);
+    // Honeypot field
+    const websiteUrl = (e.target as HTMLFormElement).website_url.value;
+    if(websiteUrl) {
+        setIsLoading(false);
+        return;
+    }
+    formData.append('website_url', websiteUrl);
 
     try {
         const response = await fetch('/api/quote-handler.php', {
@@ -105,10 +124,14 @@ const QuotePage: React.FC = () => {
             setSubmitted(true);
         } else {
             setServerMessage(result.message || 'An error occurred. Please try again.');
+            window.grecaptcha.reset();
+            setRecaptchaToken(null);
         }
     } catch (error) {
         console.error('Submission error:', error);
         setServerMessage('An unexpected network error occurred. Please try again later.');
+        window.grecaptcha.reset();
+        setRecaptchaToken(null);
     } finally {
         setIsLoading(false);
     }
@@ -117,8 +140,9 @@ const QuotePage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Request a Quote | KayJay Security Solutions"
-        description="Get a tailored security quote from Sri Lanka's No.1 security service provider. Select your required services, from professional guards to cash management, and we'll provide a custom solution."
+        title="Request a Security Quote | Trusted Provider in Sri Lanka"
+        description="Get a free, no-obligation quote from Sri Lanka's trusted security provider. We offer custom solutions for manned guards, electronic security, cash management, and more."
+        keywords="security quote sri lanka, request a quote, security services pricing, get security proposal"
         imageUrl="https://picsum.photos/1200/630?random=17"
       />
       <PageHeader title="Request a Quote" subtitle="Let us tailor a security solution that meets your exact needs. Please provide your details below." />
@@ -132,7 +156,7 @@ const QuotePage: React.FC = () => {
                 <p>Your quote request has been received. Our team will review your requirements and get in touch with you shortly.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 {serverMessage && (
                   <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
                     <p>{serverMessage}</p>
@@ -165,7 +189,7 @@ const QuotePage: React.FC = () => {
                   <div className="grid grid-cols-1 gap-y-6 gap-x-6 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                      <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                      <input type="text" name="name" id="name" value={formState.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                       {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
                     <div>
@@ -174,12 +198,12 @@ const QuotePage: React.FC = () => {
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-                      <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                      <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                       {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
-                      <input type="tel" name="phone" id="phone" value={formState.phone} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" />
+                      <input type="tel" name="phone" id="phone" value={formState.phone} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" required />
                       {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                     </div>
                   </div>
@@ -189,6 +213,19 @@ const QuotePage: React.FC = () => {
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message / Additional Details</label>
                   <textarea name="message" id="message" rows={5} value={formState.message} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-kayjay-gold focus:border-kayjay-gold" placeholder="Please provide any additional details about your security needs, location, or specific requirements."></textarea>
                 </div>
+                
+                <div>
+                  <ReCaptchaV2
+                    sitekey="6LemDAssAAAAAD-Ps5YSndCnz0Wlm89Lq0tJgOYI"
+                    onVerify={(token) => {
+                      setRecaptchaToken(token);
+                      if (errors.recaptcha) {
+                        setErrors(prev => ({...prev, recaptcha: ''}));
+                      }
+                    }}
+                  />
+                  {errors.recaptcha && <p className="text-red-500 text-sm mt-2">{errors.recaptcha}</p>}
+                </div>
 
                 <div className="text-right">
                   <button type="submit" disabled={isLoading} className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-full text-kayjay-green bg-kayjay-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kayjay-gold transition-transform transform hover:scale-105 disabled:bg-yellow-300 disabled:cursor-not-allowed">
@@ -196,7 +233,7 @@ const QuotePage: React.FC = () => {
                   </button>
                 </div>
                 {/* Honeypot field for bot protection */}
-                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                <div className="absolute left-[-5000px]" aria-hidden="true">
                   <input type="text" name="website_url" tabIndex={-1} autoComplete="off" />
                 </div>
               </form>

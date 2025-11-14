@@ -20,8 +20,9 @@ const CashManagementPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="Expert Cash Management Solutions | KayJay Security Sri Lanka"
-        description="Our Cash Management division provides premier end-to-end cash handling, ATM management, and secure logistics solutions, solidifying our position as Sri Lanka's No.1 security service provider."
+        title="ISO Certified Cash Management Solutions in Sri Lanka"
+        description="KayJay's Cash Management division provides premier end-to-end cash handling, ATM management, and secure logistics solutions, solidifying our position as Sri Lanka's trusted security provider."
+        keywords="cash management sri lanka, atm management, secure logistics, cash handling, iso 9001, financial operations"
         imageUrl="https://picsum.photos/1200/630?random=7"
       />
       <PageHeader 
@@ -129,7 +130,7 @@ const CashManagementPage: React.FC = () => {
                             ))}
                         </div>
                         <div className="mt-8 text-center text-gray-600">
-                             <p><span className="font-bold">Corporate Office:</span> No. 337A, Rajagiriya Road, Nawala</p>
+                             <p><span className="font-bold">Corporate Office:</span> No. 337/A Nawala Rd, Sri Jayawardenepura Kotte, 10100</p>
                              <p><span className="font-bold">Head Office:</span> No. 500, Nawala Road, Rajagiriya</p>
                         </div>
                     </div>

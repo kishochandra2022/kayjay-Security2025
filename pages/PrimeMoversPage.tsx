@@ -27,8 +27,9 @@ const PrimeMoversPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="KayJay Prime Movers | Logistics by Sri Lanka's No.1 Security Company"
-        description="KayJay Prime Movers offers a wide range of cost-effective and safe logistical services in Sri Lanka. As part of a trusted security company, we handle your transportation needs with the highest standards."
+        title="Logistics & Prime Movers Services in Sri Lanka"
+        description="KayJay Prime Movers, backed by Sri Lanka's most trusted security company, offers a wide range of cost-effective and safe logistical and transportation services across the nation."
+        keywords="prime movers sri lanka, logistics services, transportation company, heavy transport, freight services"
         imageUrl="https://picsum.photos/1200/630?random=6"
       />
       <PageHeader title="KAYJAY PRIME MOVERS" subtitle="Seamless & Secure Transportation Solutions Across Sri Lanka." />

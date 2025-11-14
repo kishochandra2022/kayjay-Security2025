@@ -7,8 +7,9 @@ const AboutPage: React.FC = () => {
   return (
     <div>
       <Seo
-        title="About Sri Lanka's Top Security Company"
-        description="Learn about KayJay Security, a leading private security company in Sri Lanka with over 45 years of experience. Discover our mission to provide the best professional security guards and solutions."
+        title="About KayJay | Our Story as Sri Lanka's Top Security Company"
+        description="Learn about KayJay Security, a leading private security company in Sri Lanka. Discover our 45-year history, mission, and our commitment to being the most trusted security provider."
+        keywords="about us, security company profile, sri lanka security, 45 years experience, trusted security provider, private security company"
         imageUrl="https://picsum.photos/1200/630?random=2"
       />
       <PageHeader title="About KayJay Security" subtitle="Over 45 Years of Trusted Security Services in Sri Lanka." />

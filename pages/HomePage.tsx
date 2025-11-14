@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { FaCheck, FaShieldAlt, FaUserShield, FaThLarge, FaHandshake, FaTruck, FaTv, FaCertificate, FaStore, FaShippingFast } from 'react-icons/fa';
+import { 
+    FaCheck, 
+    FaShieldAlt, 
+    FaUserShield, 
+    FaThLarge, 
+    FaHandshake, 
+    FaTruck, 
+    FaTv, 
+    FaCertificate, 
+    FaStore, 
+    FaShippingFast
+} from 'react-icons/fa';
 import BranchNetworkMap from '../components/BranchNetworkMap';
 
 const ServiceCard: React.FC<{ title: string; description: string; path: string; icon: React.ReactNode; delay: number }> = ({ title, description, path, icon, delay }) => (
@@ -60,26 +71,37 @@ const coreServices = [
 
 
 const HomePage: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
   return (
     <div>
       <Seo
-        title="Sri Lanka’s No.1 Security Company | Over 45 Years of Trusted Protection"
-        description="Providing reliable and professional security services in Sri Lanka for over 45 years. As the top security solutions provider, we are your trusted partner in safety and protection."
+        title="Top Security Company in Sri Lanka"
+        description="KayJay Security is the trusted security provider in Sri Lanka with over 45 years of excellence. We offer professional security guards, cash transit, and advanced security solutions. Get a quote today!"
+        keywords="security company sri lanka, security services sri lanka, trusted security provider, professional security guards, cash transit, cctv"
         imageUrl="https://picsum.photos/1200/630?random=10"
       />
       
       {/* Hero Video Section */}
-      <section className="relative w-full overflow-hidden cursor-pointer">
-        <Link to="/solutions" aria-label="View our solutions" className="block">
+      <section className="relative w-full overflow-hidden group bg-kayjay-dark-gray">
+        <Link to="/solutions" aria-label="View our solutions" className="block cursor-pointer">
           <video
+            ref={videoRef}
             className="w-full h-auto block"
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            poster="https://images.pexels.com/photos/7131154/pexels-photo-7131154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             autoPlay
             muted
             loop
             playsInline
+            preload="metadata"
             aria-label="Promotional video for KayJay Security"
           >
+            {/* 
+              Using a more compressed and relevant video. 
+              Ideally, a .webm version should also be provided for browsers that support it, as it offers better compression.
+              e.g. <source src="/videos/kayjay-promo.webm" type="video/webm" />
+            */}
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           {/* Overlay to indicate interactivity */}
