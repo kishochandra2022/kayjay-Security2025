@@ -243,7 +243,7 @@ const Header: React.FC = () => {
                  )}
               </div>
               <div className="flex items-center space-x-4">
-                  <a href="https://web.facebook.com/kayjaygroup/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-kayjay-gold transition-colors"><FacebookIcon className="h-5 w-5" /></a>
+                  <a href="https://web.facebook.com/kayjaysecurity" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-kayjay-gold transition-colors"><FacebookIcon className="h-5 w-5" /></a>
                   <a href="https://www.instagram.com/kayjay_security/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-kayjay-gold transition-colors"><InstagramIcon className="h-5 w-5" /></a>
               </div>
             </div>

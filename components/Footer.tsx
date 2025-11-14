@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                 <div>
                     <p className="font-semibold text-gray-300">Follow Us</p>
                     <div className="flex space-x-4 mt-2">
-                      <a href="https://web.facebook.com/kayjaygroup/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors"><FacebookIcon className="h-5 w-5" /></a>
+                      <a href="https://web.facebook.com/kayjaysecurity" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors"><FacebookIcon className="h-5 w-5" /></a>
                       <a href="https://www.instagram.com/kayjay_security/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-white transition-colors"><InstagramIcon className="h-5 w-5" /></a>
                     </div>
                 </div>

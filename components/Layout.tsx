@@ -43,7 +43,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           "addressCountry": "LK"
       },
       "sameAs": [
-        "https://web.facebook.com/kayjaygroup/",
+        "https://web.facebook.com/kayjaysecurity",
         "https://www.instagram.com/kayjay_security/"
       ]
     };

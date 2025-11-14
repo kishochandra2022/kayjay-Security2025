@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -300,7 +301,7 @@ const ContactPage: React.FC = () => {
                   </div>
                    <div className="sm:col-span-2">
                     <ReCaptchaV2
-                      sitekey="6LemDAssAAAAAD-Ps5YSndCnz0Wlm89Lq0tJgOYI"
+                      sitekey="6LdWJAwsAAAAAHP6OmRNkRtKR4vz4c1AU3t1UApk"
                       onVerify={(token) => {
                         setRecaptchaToken(token);
                         if (errors.recaptcha) {
