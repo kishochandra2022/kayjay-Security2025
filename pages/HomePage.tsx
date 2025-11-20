@@ -1,3 +1,4 @@
+
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
@@ -8,12 +9,10 @@ import {
     FaThLarge, 
     FaHandshake, 
     FaTruck, 
-    FaTv, 
-    FaCertificate, 
-    FaStore, 
-    FaShippingFast
+    FaTv
 } from 'react-icons/fa';
 import BranchNetworkMap from '../components/BranchNetworkMap';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 
 const ServiceCard: React.FC<{ title: string; description: string; path: string; icon: React.ReactNode; delay: number }> = ({ title, description, path, icon, delay }) => (
   <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full" data-aos="fade-up" data-aos-delay={delay}>
@@ -49,24 +48,6 @@ const coreServices = [
         path: "/solutions",
         icon: <FaTv className="h-8 w-8" />,
     },
-    {
-        title: "Expertise & Training",
-        description: "Comprehensive training programs and rigorous vetting to ensure the highest standards of service.",
-        path: "/expertise",
-        icon: <FaCertificate className="h-8 w-8" />,
-    },
-    {
-        title: "Retail & Corporate Security",
-        description: "Specialized security for retail outlets, corporate offices, and public sector institutions.",
-        path: "/security-personnel",
-        icon: <FaStore className="h-8 w-8" />,
-    },
-    {
-        title: "Logistics & Transport",
-        description: "Safe, cost-effective, and reliable transportation solutions for heavy machinery and goods.",
-        path: "/prime-movers",
-        icon: <FaShippingFast className="h-8 w-8" />,
-    },
 ];
 
 
@@ -77,9 +58,9 @@ const HomePage: React.FC = () => {
     <div>
       <Seo
         title="Top Security Company in Sri Lanka"
-        description="KayJay Security is the trusted security provider in Sri Lanka with over 45 years of excellence. We offer professional security guards, cash transit, and advanced security solutions. Get a quote today!"
-        keywords="security company sri lanka, security services sri lanka, trusted security provider, professional security guards, cash transit, cctv"
-        imageUrl="https://picsum.photos/1200/630?random=10"
+        description="KayJay Security is Sri Lanka's No.1 security service provider with over 45 years of experience. We offer professional security guards, secure cash transit (CIT), CCTV surveillance, and integrated security solutions for businesses and homes."
+        keywords="security company sri lanka, private security services colombo, professional security guards, cash in transit sri lanka, best security firm sri lanka, cctv monitoring, corporate security services, industrial security guards, event security management"
+        imageUrl="/images/og-home.jpg"
       />
       
       {/* Hero Video Section */}
@@ -88,7 +69,7 @@ const HomePage: React.FC = () => {
           <video
             ref={videoRef}
             className="w-full h-auto block"
-            poster="https://images.pexels.com/photos/7131154/pexels-photo-7131154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            poster="/images/home-hero-poster.jpg"
             autoPlay
             muted
             loop
@@ -197,10 +178,12 @@ const HomePage: React.FC = () => {
             </Link>
           </div>
           <div className="md:w-1/2 flex justify-center" data-aos="fade-left">
-             <img src="https://picsum.photos/600/400?random=1" alt="A KayJay professional security guard on duty" className="rounded-lg shadow-2xl w-full h-96 object-cover" loading="lazy"/>
+             <img src="/images/home-promise.jpg" alt="A KayJay professional security guard on duty" className="rounded-lg shadow-2xl w-full h-96 object-cover" loading="lazy"/>
           </div>
         </div>
       </section>
+
+      <TestimonialCarousel />
 
       <BranchNetworkMap />
 

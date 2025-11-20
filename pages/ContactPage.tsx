@@ -23,8 +23,8 @@ const ContactInfoCard: React.FC<{ title: string; children: React.ReactNode; icon
 );
 
 const generalContactInfo = [
-    { title: "Phone", icon: <FaPhoneAlt className="h-8 w-8" />, content: <><p><a href="tel:+94722249254" className="hover:text-kayjay-gold font-bold">+94 (72) 224 9254 (Hotline)</a></p><p><a href="tel:+94112522302" className="hover:text-kayjay-gold">+94 (11) 252 2302</a></p><p><a href="tel:+94112529242" className="hover:text-kayjay-gold">+94 (11) 252 9242</a></p><p><a href="tel:+94112526060" className="hover:text-kayjay-gold">+94 (11) 252 6060</a></p><p><a href="tel:+94114891888" className="hover:text-kayjay-gold">+94 (11) 489 1888</a></p></> },
-    { title: "Email", icon: <FaEnvelope className="h-8 w-8" />, content: <><p><a href="mailto:kayjay@kayjay-group.com" className="hover:text-kayjay-gold">kayjay@kayjay-group.com</a></p><p><a href="mailto:sales@kayjay-group.com" className="hover:text-kayjay-gold">sales@kayjay-group.com</a></p><p><a href="mailto:marketing@kayjay-group.com" className="hover:text-kayjay-gold">marketing@kayjay-group.com</a></p></> },
+    { title: "Phone", icon: <FaPhoneAlt className="h-8 w-8" />, content: <><p><a href="tel:+94722249254" className="hover:text-kayjay-gold font-bold">+94 (72) 224 9254 (Hotline)</a></p><p><a href="tel:+94742021818" className="hover:text-kayjay-gold">+94 (74) 202 1818</a></p><p><a href="tel:+94112522302" className="hover:text-kayjay-gold">+94 (11) 252 2302</a></p><p><a href="tel:+94112529242" className="hover:text-kayjay-gold">+94 (11) 252 9242</a></p><p><a href="tel:+94112526060" className="hover:text-kayjay-gold">+94 (11) 252 6060</a></p><p><a href="tel:+94114891888" className="hover:text-kayjay-gold">+94 (11) 489 1888</a></p></> },
+    { title: "Email", icon: <FaEnvelope className="h-8 w-8" />, content: <><p><a href="mailto:marketing@kayjay-group.com" className="hover:text-kayjay-gold">marketing@kayjay-group.com</a></p></> },
 ];
 
 const ContactPage: React.FC = () => {
@@ -142,7 +142,7 @@ const ContactPage: React.FC = () => {
         title="Contact Sri Lanka's Leading Security Company"
         description="Get in touch with KayJay Security, Sri Lanka's most trusted security provider. Contact us for professional security guards, cash transit services, or a custom security solution."
         keywords="contact security company, security services contact, kayjay security address, security solutions sri lanka"
-        imageUrl="https://picsum.photos/1200/630?random=15"
+        imageUrl="/images/og-contact.jpg"
       />
       <PageHeader title="Contact Us" subtitle="We're here to help. Reach out to Sri Lanka's No.1 security service provider with your needs and we'll respond promptly." />
 

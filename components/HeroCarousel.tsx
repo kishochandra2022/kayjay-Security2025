@@ -13,21 +13,21 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: 'https://picsum.photos/1920/1080?random=10',
+    image: '/images/hero-slide-1.jpg',
     alt: 'A vigilant security guard from Sri Lanka\'s No.1 private security company monitoring a surveillance system',
     title: 'Trusted Security Company Provider in Sri Lanka',
     subtitle: 'KayJay Security',
     description: 'With over 45 years of trusted security excellence, we are the pioneering brand of security & surveillance in Sri Lanka, providing top security solutions for your peace of mind.',
   },
   {
-    image: 'https://picsum.photos/1920/1080?random=11',
+    image: '/images/hero-slide-2.jpg',
     alt: 'An armored cash transit vehicle from a top security provider in Sri Lanka',
     title: 'Integrated Security Solutions',
     subtitle: 'Manpower Meets Technology',
     description: 'We offer fully integrated security services in Sri Lanka, from highly-trained professional security guards to advanced electronic systems, tailored to your specific needs.',
   },
   {
-    image: 'https://picsum.photos/1920/1080?random=12',
+    image: '/images/hero-slide-3.jpg',
     alt: 'A professional team handling cash management in a secure facility in Sri Lanka',
     title: 'Cash Management Experts',
     subtitle: 'Secure & Reliable',

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -30,7 +31,7 @@ const PrimeMoversPage: React.FC = () => {
         title="Logistics & Prime Movers Services in Sri Lanka"
         description="KayJay Prime Movers, backed by Sri Lanka's most trusted security company, offers a wide range of cost-effective and safe logistical and transportation services across the nation."
         keywords="prime movers sri lanka, logistics services, transportation company, heavy transport, freight services"
-        imageUrl="https://picsum.photos/1200/630?random=6"
+        imageUrl="/images/og-prime-movers.jpg"
       />
       <PageHeader title="KAYJAY PRIME MOVERS" subtitle="Seamless & Secure Transportation Solutions Across Sri Lanka." />
       
@@ -42,7 +43,7 @@ const PrimeMoversPage: React.FC = () => {
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div>
-                                <img src="https://picsum.photos/800/600?random=6" alt="A large transportation truck from KayJay Prime Movers, part of a leading security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                                <img src="/images/prime-movers-truck.jpg" alt="A large transportation truck from KayJay Prime Movers, part of a leading security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                             <div>
                                 <h2 className="text-3xl font-bold text-kayjay-green mb-4">A Legacy of Trust, A Future in Motion</h2>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FacebookIcon, InstagramIcon } from './icons';
@@ -75,13 +76,13 @@ const Footer: React.FC = () => {
                 <div>
                     <p className="font-semibold text-gray-300">Phone</p>
                     <a href="tel:+94722249254" className="block hover:text-white transition-colors">+94 (72) 224 9254 (Hotline)</a>
+                    <a href="tel:+94742021818" className="block hover:text-white transition-colors">+94 (74) 202 1818</a>
                     <a href="tel:+94112522302" className="block hover:text-white transition-colors">+94 (11) 252 2302</a>
                     <a href="tel:+94112529242" className="block hover:text-white transition-colors">+94 (11) 252 9242</a>
                 </div>
                  <div>
                     <p className="font-semibold text-gray-300">Email</p>
-                    <a href="mailto:kayjay@kayjay-group.com" className="block hover:text-white transition-colors">kayjay@kayjay-group.com</a>
-                    <a href="mailto:sales@kayjay-group.com" className="block hover:text-white transition-colors">sales@kayjay-group.com</a>
+                    <a href="mailto:marketing@kayjay-group.com" className="block hover:text-white transition-colors">marketing@kayjay-group.com</a>
                 </div>
                 <div>
                     <p className="font-semibold text-gray-300">Follow Us</p>

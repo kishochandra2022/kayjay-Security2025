@@ -144,7 +144,7 @@ const CareersPage: React.FC = () => {
         title="Security Guard Jobs & Careers in Sri Lanka | Join KayJay"
         description="Build your career with Sri Lanka's leading private security company. We offer security guard jobs and other opportunities for dedicated professionals. Apply today!"
         keywords="security careers, security guard jobs sri lanka, security jobs colombo, join security company"
-        imageUrl="https://picsum.photos/1200/630?random=14"
+        imageUrl="/images/og-careers.jpg"
       />
       <PageHeader title="Join KayJay Security" subtitle="Build a meaningful career with Sri Lanka's No.1 security service provider, a team that values integrity, responsibility, and service." />
       

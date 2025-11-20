@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { searchableContent, SearchableContent } from '../data/searchableContent';
@@ -17,8 +18,6 @@ const navLinks = [
           { name: 'Manned Guard Services', path: '/solutions' },
           { name: 'Security Personnel', path: '/security-personnel' },
           { name: 'Electronic Security', path: '/solutions' },
-          { name: 'Retail Security', path: '/solutions' },
-          { name: 'Civil Detectives', path: '/solutions' },
         ]
       },
       {
@@ -26,9 +25,6 @@ const navLinks = [
         links: [
           { name: 'KAYJAY Cash Management', path: '/cash-management' },
           { name: 'Cash Transit & Management', path: '/cash-transit' },
-          { name: 'Our Expertise & Training', path: '/expertise' },
-          { name: 'Pre-employment Checks', path: '/expertise' },
-          { name: 'Civil Recovery', path: '/solutions' },
         ]
       },
       {
@@ -215,9 +211,9 @@ const Header: React.FC = () => {
                 <PhoneIcon className="h-4 w-4" />
                 <span>+94 (72) 224 9254</span>
               </a>
-              <a href="mailto:sales@kayjay-group.com" className="hidden sm:flex items-center space-x-2 hover:text-kayjay-gold transition-colors">
+              <a href="mailto:marketing@kayjay-group.com" className="hidden sm:flex items-center space-x-2 hover:text-kayjay-gold transition-colors">
                 <MailIcon className="h-4 w-4" />
-                <span>sales@kayjay-group.com</span>
+                <span>marketing@kayjay-group.com</span>
               </a>
             </div>
             <div className="hidden md:flex items-center space-x-6">

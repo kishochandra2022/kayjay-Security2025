@@ -28,7 +28,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       "name": "KayJay Security",
       "description": "As Sri Lanka's No.1 security service provider with over 45 years of trusted security excellence, we provide professional security guards and top security solutions across the nation.",
       "url": "https://www.kayjay-group.com", // Placeholder URL
-      "logo": "https://www.kayjay-group.com/logo.png", // Placeholder URL
+      "logo": "https://www.kayjay-group.com/images/logo.jpg", // Updated to local placeholder
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+94-11-252-2302",

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -38,9 +39,9 @@ const SecurityPersonnelPage: React.FC = () => {
     <div>
       <Seo
         title="Professional Security Guards & Personnel in Sri Lanka"
-        description="Hire expert security personnel in Sri Lanka for retail, events, public, and industrial sectors. Kay Jay provides trained officers, civil detectives, and integrated security solutions."
-        keywords="security personnel sri lanka, hire security guards, retail security, event security, corporate security, trained guards"
-        imageUrl="https://picsum.photos/1200/630?random=19"
+        description="Hire expert security personnel in Sri Lanka. We provide retail security officers, event security staff, industrial guards, VIP protection, and corporate security teams. Trusted by top Sri Lankan businesses."
+        keywords="hire security guards sri lanka, professional security officers, retail security guards, event security services, industrial security personnel, vip bodyguards sri lanka, corporate security teams, manned guarding services"
+        imageUrl="/images/og-security-personnel.jpg"
       />
       <PageHeader 
         title="KAY JAY SECURITY PERSONNEL" 

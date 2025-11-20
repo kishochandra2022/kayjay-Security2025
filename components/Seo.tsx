@@ -1,71 +1,53 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 interface SeoProps {
   title: string;
   description: string;
   keywords?: string;
   imageUrl?: string;
+  type?: string;
 }
 
-const Seo: React.FC<SeoProps> = ({ title, description, keywords, imageUrl }) => {
-  useEffect(() => {
-    const fullTitle = `${title} | KayJay Security - TRUSTED SECURITY PROVIDER IN SRI LANKA`;
-    const siteUrl = window.location.href;
+const Seo: React.FC<SeoProps> = ({ 
+  title, 
+  description, 
+  keywords, 
+  imageUrl, 
+  type = 'website' 
+}) => {
+  const siteName = "KayJay Security";
+  const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  const siteUrl = window.location.href;
+  const defaultImage = '/images/og-default.jpg'; // Updated to local placeholder
+  const finalImage = imageUrl || defaultImage;
 
-    // Update title
-    document.title = fullTitle;
-
-    // Update meta tags using a helper
-    setMetaTag('name', 'description', description);
-    if (keywords) {
-      setMetaTag('name', 'keywords', keywords);
-    }
-
-
-    // Open Graph Tags
-    setMetaTag('property', 'og:title', fullTitle);
-    setMetaTag('property', 'og:description', description);
-    setMetaTag('property', 'og:type', 'website');
-    setMetaTag('property', 'og:url', siteUrl);
-    setMetaTag('property', 'og:site_name', 'KayJay Security');
-    // Using a placeholder image, ideally this would be specific to the page
-    setMetaTag('property', 'og:image', imageUrl || 'https://www.kayjay-group.com/og-image.jpg'); // Placeholder
-    setMetaTag('property', 'og:image:width', '1200');
-    setMetaTag('property', 'og:image:height', '630');
-    
-    // Twitter Card Tags
-    setMetaTag('name', 'twitter:card', 'summary_large_image');
-    setMetaTag('name', 'twitter:title', fullTitle);
-    setMetaTag('name', 'twitter:description', description);
-    // Using a placeholder image
-    setMetaTag('name', 'twitter:image', imageUrl || 'https://www.kayjay-group.com/twitter-card.jpg'); // Placeholder
-    
-    // Set canonical URL
-    setLinkTag('canonical', siteUrl);
-
-  }, [title, description, keywords, imageUrl]);
-
-  const setMetaTag = (attr: 'name' | 'property', key: string, content: string) => {
-    let element = document.querySelector(`meta[${attr}="${key}"]`);
-    if (!element) {
-      element = document.createElement('meta');
-      element.setAttribute(attr, key);
-      document.head.appendChild(element);
-    }
-    element.setAttribute('content', content);
-  };
-
-  const setLinkTag = (rel: string, href: string) => {
-      let element = document.querySelector(`link[rel="${rel}"]`);
-      if (!element) {
-          element = document.createElement('link');
-          element.setAttribute('rel', rel);
-          document.head.appendChild(element);
-      }
-      element.setAttribute('href', href);
-  };
-
-  return null;
+  return (
+    <Helmet>
+      {/* Standard Metadata */}
+      <title>{fullTitle}</title>
+      <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={siteUrl} />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={finalImage} />
+      <meta property="og:site_name" content={siteName} />
+      
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={finalImage} />
+      
+      {/* Canonical URL */}
+      <link rel="canonical" href={siteUrl} />
+    </Helmet>
+  );
 };
 
 export default Seo;

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -72,7 +73,7 @@ const CashTransitPage: React.FC = () => {
         title="Secure Cash Transit & Management Services in Sri Lanka"
         description="Secure your assets with our professional cash transit and management solutions. As a trusted security provider in Sri Lanka, we offer armored vehicle services, ATM replenishment, and more."
         keywords="cash transit sri lanka, cash in transit, armored vehicle services, secure cash management, atm replenishment"
-        imageUrl="https://picsum.photos/1200/630?random=5"
+        imageUrl="/images/og-cash-transit.jpg"
       />
       <PageHeader title="Cash Transit & Cash Management" subtitle="Secure solutions from a trusted security provider that safeguard your cash assets through every link of the chain." />
       
@@ -90,7 +91,7 @@ const CashTransitPage: React.FC = () => {
                                 <p className="text-gray-700">It all comes together to keep your cash flowing smoothly, swiftly and safely around your business. We will take care to handle cash in a reliable way. The cash services segment is gradually evolving as a key and fast-growing service offering within the private security services industry.</p>
                             </div>
                             <div>
-                                <img src="https://picsum.photos/800/600?random=5" alt="A secure armored vehicle for private security services in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                                <img src="/images/cash-transit-vehicle.jpg" alt="A secure armored vehicle for private security services in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                         </div>
                     </div>
@@ -129,7 +130,7 @@ const CashTransitPage: React.FC = () => {
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div className="order-2 md:order-1">
-                                <img src="https://picsum.photos/800/600?random=8" alt="A high-security vault door" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                                <img src="/images/cash-transit-vault.jpg" alt="A high-security vault door" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                             <div className="order-1 md:order-2">
                                 <div className="flex items-center mb-4">

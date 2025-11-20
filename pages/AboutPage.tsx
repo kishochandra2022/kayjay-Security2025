@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -10,7 +11,7 @@ const AboutPage: React.FC = () => {
         title="About KayJay | Our Story as Sri Lanka's Top Security Company"
         description="Learn about KayJay Security, a leading private security company in Sri Lanka. Discover our 45-year history, mission, and our commitment to being the most trusted security provider."
         keywords="about us, security company profile, sri lanka security, 45 years experience, trusted security provider, private security company"
-        imageUrl="https://picsum.photos/1200/630?random=2"
+        imageUrl="/images/og-about.jpg"
       />
       <PageHeader title="About KayJay Security" subtitle="Over 45 Years of Trusted Security Services in Sri Lanka." />
       
@@ -18,7 +19,7 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
-              <img src="https://picsum.photos/800/600?random=2" alt="The KayJay Security company office building" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy"/>
+              <img src="/images/about-office.jpg" alt="The KayJay Security company office building" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy"/>
             </div>
             <div className="text-lg text-gray-700 space-y-4" data-aos="fade-left">
               <h2 className="text-3xl font-bold text-kayjay-green mb-4">Our Story as a Top Security Company in Sri Lanka</h2>

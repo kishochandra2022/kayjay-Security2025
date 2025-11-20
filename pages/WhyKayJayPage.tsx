@@ -31,7 +31,7 @@ const WhyKayJayPage: React.FC = () => {
         title="Why Choose KayJay | Trusted Security Provider in Sri Lanka"
         description="Discover why KayJay is the top choice for security in Sri Lanka. Our integrated approach, trained professional security guards, and 45+ year proven track record make us the trusted provider."
         keywords="why choose us, trusted security provider, experienced security guards, integrated security, security company benefits"
-        imageUrl="https://picsum.photos/1200/630?random=13"
+        imageUrl="/images/og-why-kayjay.jpg"
       />
       <PageHeader title="Why Choose KayJay Security?" subtitle="As the leading private security company in Sri Lanka, we combine manpower and electronic security for holistic, high-impact solutions." />
       

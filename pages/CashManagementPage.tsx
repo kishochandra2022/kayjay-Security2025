@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -21,9 +22,9 @@ const CashManagementPage: React.FC = () => {
     <div>
       <Seo
         title="ISO Certified Cash Management Solutions in Sri Lanka"
-        description="KayJay's Cash Management division provides premier end-to-end cash handling, ATM management, and secure logistics solutions, solidifying our position as Sri Lanka's trusted security provider."
-        keywords="cash management sri lanka, atm management, secure logistics, cash handling, iso 9001, financial operations"
-        imageUrl="https://picsum.photos/1200/630?random=7"
+        description="Leading cash management services in Sri Lanka. ISO 9001:2015 certified solutions including cash-in-transit (CIT), ATM replenishment, secure vaulting, and financial logistics for banks and retail."
+        keywords="cash management sri lanka, cash in transit, cit services colombo, atm replenishment services, secure logistics, cash processing center, armored vehicle transport, secure vault services"
+        imageUrl="/images/og-cash-management.jpg"
       />
       <PageHeader 
         title="KAYJAY Cash Management" 
@@ -38,7 +39,7 @@ const CashManagementPage: React.FC = () => {
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div>
-                                <img src="https://picsum.photos/800/600?random=7" alt="A secure cash handling and processing facility by a top security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy"/>
+                                <img src="/images/cash-management-facility.jpg" alt="A secure cash handling and processing facility by a top security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy"/>
                             </div>
                             <div className="text-lg text-gray-700 space-y-4">
                                 <h2 className="text-3xl font-bold text-kayjay-green mb-4">About Our Cash Management Services</h2>

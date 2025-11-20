@@ -143,7 +143,7 @@ const QuotePage: React.FC = () => {
         title="Request a Security Quote | Trusted Provider in Sri Lanka"
         description="Get a free, no-obligation quote from Sri Lanka's trusted security provider. We offer custom solutions for manned guards, electronic security, cash management, and more."
         keywords="security quote sri lanka, request a quote, security services pricing, get security proposal"
-        imageUrl="https://picsum.photos/1200/630?random=17"
+        imageUrl="/images/og-quote.jpg"
       />
       <PageHeader title="Request a Quote" subtitle="Let us tailor a security solution that meets your exact needs. Please provide your details below." />
 

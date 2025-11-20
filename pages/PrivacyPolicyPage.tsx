@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -8,7 +9,7 @@ const PrivacyPolicyPage: React.FC = () => {
       <Seo
         title="Privacy Policy"
         description="Read the privacy policy for KayJay Security, a trusted security provider in Sri Lanka. We are committed to protecting your personal information and being transparent about its use."
-        imageUrl="https://picsum.photos/1200/630?random=18"
+        imageUrl="/images/og-privacy.jpg"
       />
       <PageHeader title="Privacy Policy" subtitle="Our Commitment to Your Privacy" />
 

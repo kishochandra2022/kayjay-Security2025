@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import Seo from '../components/Seo';
@@ -29,9 +30,9 @@ const ServicesPage: React.FC = () => {
     <div>
       <Seo
         title="Comprehensive Security Solutions in Sri Lanka"
-        description="Explore a full spectrum of security services in Sri Lanka by KayJay, the nation's trusted provider. From professional security guards to electronic surveillance, we have you covered."
-        keywords="security solutions sri lanka, professional security guards, electronic security, cash transit, security services, manned guarding"
-        imageUrl="https://picsum.photos/1200/630?random=3"
+        description="Explore KayJay's full spectrum of security services. We offer professional manned guarding, electronic security systems (CCTV), retail loss prevention, civil detectives, and cash management solutions across Sri Lanka."
+        keywords="security solutions sri lanka, professional security guards, electronic security systems, cctv installation, retail security services, private investigations, civil recovery management, customer service officers, alarm monitoring"
+        imageUrl="/images/og-services.jpg"
       />
       <PageHeader title="Our Top Security Solutions" subtitle="A wide spectrum of professional security services in Sri Lanka to meet both commercial and residential needs." />
 
@@ -64,7 +65,7 @@ const ServicesPage: React.FC = () => {
                                 </ul>
                             </div>
                             <div>
-                                <img src="https://picsum.photos/800/600?random=3" alt="A professional conducting a background check for a private security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                                <img src="/images/services-background-check.jpg" alt="A professional conducting a background check for a private security company in Sri Lanka" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                         </div>
                     </div>
@@ -72,7 +73,7 @@ const ServicesPage: React.FC = () => {
                     <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg" data-aos="fade-up">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div className="order-2 md:order-1">
-                                <img src="https://picsum.photos/800/600?random=4" alt="Professional security guards in Sri Lanka during a training session" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
+                                <img src="/images/services-training.jpg" alt="Professional security guards in Sri Lanka during a training session" className="rounded-lg shadow-xl w-full h-96 object-cover" loading="lazy" />
                             </div>
                             <div className="order-1 md:order-2">
                                 <h2 className="text-3xl font-bold text-kayjay-green mb-4">Training & Development</h2>
